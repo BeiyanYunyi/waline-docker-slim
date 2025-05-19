@@ -1,0 +1,15 @@
+services:
+  waline:
+    build:
+      context: .
+    environment:
+      - "SQLITE_PATH=./data"
+      - "CLASS_IT_UP_API=http://class-it-up:8000/predict"
+    env_file:
+      - ./.env
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3000:8360"
+  class-it-up:
+    image: ghcr.io/beiyanyunyi/class-it-up:edge
