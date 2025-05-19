@@ -1,5 +1,6 @@
 services:
   waline:
+    image: ghcr.io/beiyanyunyi/waline-docker-slim:edge
     build:
       context: .
     environment:
@@ -10,6 +11,6 @@ services:
     volumes:
       - ./data:/app/data
     ports:
-      - "3000:8360"
+      - "127.0.0.1:8360:8360"
   class-it-up:
     image: ghcr.io/beiyanyunyi/class-it-up:edge
