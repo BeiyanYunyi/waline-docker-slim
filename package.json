@@ -8,7 +8,8 @@
     "thinkjs": "^3.2.15"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build":"pnpm --filter \"*\" --if-present build"
   },
   "pnpm": {
     "overrides": {
@@ -23,12 +24,15 @@
       "think-model-postgresql": "./packages/placebo",
       "think-model-mysql": "./packages/placebo",
       "think-model-mysql2": "./packages/placebo",
+      "node-fetch": "./packages/placebo",
       "think-mongo": "-",
       "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
-      "safer-buffer": "npm:@nolyfill/safer-buffer@^1"
+      "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
+      "akismet": "./packages/akismet-js"
     },
     "onlyBuiltDependencies": [
+      "esbuild",
       "sqlite3"
     ],
     "patchedDependencies": {
