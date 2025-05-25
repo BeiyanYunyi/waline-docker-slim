@@ -1,4 +1,3 @@
-import { create as createDomain } from "domain";
 import { format as formatURL } from "url";
 
 /**
@@ -209,16 +208,17 @@ export class AkismetClient {
    *
    * @param callback - callback function
    */
-  public verifyKey(callback: VerifyKeyCallback): void {
+  public async verifyKey(): Promise<{ err: string | null; isValid: boolean }> {
     const options = { api_key: this._apiKey, blog: this._blog };
-    this._postRequest(
+    const { err, status, body } = await this._postRequest(
       this._host,
       "/1.1/verify-key",
-      options,
-      (err: string | null, status: number, body: string) => {
-        callback(err, status >= 200 && status < 300 && body === "valid");
-      }
+      options
     );
+    return {
+      err,
+      isValid: status >= 200 && status < 300 && body === "valid",
+    };
   }
 
   /**
@@ -227,20 +227,17 @@ export class AkismetClient {
    * @param options - options to send to the Akismet API
    * @param callback - callback function
    */
-  public checkComment(
-    options: AkismetParameters,
-    callback: CheckCommentCallback
-  ): void {
+  public async checkComment(
+    options: AkismetParameters
+  ): Promise<{ err: string | null; isSpam: boolean }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
-    this._postRequest(
+    const { err, status, body } = await this._postRequest(
       this._endPoint,
       "/1.1/comment-check",
-      options,
-      (err: string | null, status: number, body: string) => {
-        callback(err, status >= 200 && status < 300 && body === "true");
-      }
+      options
     );
+    return { err, isSpam: status >= 200 && status < 300 && body === "true" };
   }
 
   /**
@@ -249,20 +246,17 @@ export class AkismetClient {
    * @param options - options to send to the Akismet API
    * @param callback - callback function
    */
-  public submitSpam(
-    options: AkismetParameters,
-    callback: SubmitCallback
-  ): void {
+  public async submitSpam(
+    options: AkismetParameters
+  ): Promise<{ err: string | null }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
-    this._postRequest(
+    const { err } = await this._postRequest(
       this._endPoint,
       "/1.1/submit-spam",
-      options,
-      (err: string | null, status: number, body: string) => {
-        callback(err);
-      }
+      options
     );
+    return { err };
   }
 
   /**
@@ -271,28 +265,27 @@ export class AkismetClient {
    * @param options - options to send to the Akismet API
    * @param callback - callback function
    */
-  public submitHam(options: AkismetParameters, callback: SubmitCallback): void {
+  public async submitHam(
+    options: AkismetParameters
+  ): Promise<{ err: string | null }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
-    this._postRequest(
+    const { err } = await this._postRequest(
       this._endPoint,
       "/1.1/submit-ham",
-      options,
-      (err: string | null, status: number, body: string) => {
-        callback(err);
-      }
+      options
     );
+    return { err };
   }
 
   /**
    * Posts a request to the Akismet API server.
    */
-  private _postRequest(
+  private async _postRequest(
     hostname: string,
     path: string,
-    query: { [key: string]: any },
-    callback: PostRequestCallback
-  ): void {
+    query: { [key: string]: any }
+  ): Promise<{ err: string | null; status: number; body: string }> {
     const requestUrl = formatURL({
       protocol: this._port === 443 ? "https" : "http",
       hostname: hostname,
@@ -300,54 +293,27 @@ export class AkismetClient {
       port: this._port,
     });
 
-    // const options = {
-    //   url: requestUrl,
-    //   form: query,
-    //   headers: {
-    //     "content-type": "charset=" + this._charSet,
-    //     "user-agent": this._userAgent,
-    //   },
-    // };
-
-    const dom = createDomain();
-    dom.on("error", (err: any) => callback(err, 0, ""));
-
-    dom.run(async () => {
-      try {
-        const fetchRes = await fetch(requestUrl, {
-          method: "POST",
-          body: new URLSearchParams(query),
-          headers: {
-            "content-type": "application/x-www-form-urlencoded",
-            "user-agent": this._userAgent,
-          },
-        });
-        const text = await fetchRes.text();
-        callback(null, fetchRes.status, text);
-      } catch (e: any) {
-        callback(e, 0, "");
+    try {
+      const fetchRes = await fetch(requestUrl, {
+        method: "POST",
+        body: new URLSearchParams(query),
+        headers: {
+          "content-type":
+            "application/x-www-form-urlencoded; charset=" + this._charSet,
+          "user-agent": this._userAgent,
+        },
+        mode: "cors",
+      });
+      const text = await fetchRes.text();
+      if (!fetchRes.ok) {
+        throw new Error(
+          `HTTP error! status: ${fetchRes.status}, body: ${text}`
+        );
       }
-      // postRequest(options, (err: any, response: Response, body: any) => {
-      //   if (err) {
-      //     callback(err, 0, "");
-      //   } else {
-      //     callback(null, response.statusCode, body);
-      //   }
-      // });
-    });
-  }
-
-  /**
-   * Historic alias of `checkComment`.
-   *
-   * @param options - options to send to the Akismet API
-   * @param callback - callback function
-   */
-  private checkSpam(
-    options: AkismetParameters,
-    callback: CheckCommentCallback
-  ): void {
-    this.checkComment(options, callback);
+      return { err: null, status: fetchRes.status, body: text };
+    } catch (e: any) {
+      return { err: e, status: 0, body: "" };
+    }
   }
 }
 

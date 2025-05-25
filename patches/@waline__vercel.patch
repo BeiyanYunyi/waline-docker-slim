@@ -17,6 +17,63 @@ index 80a472dab22bc4b2929066670e673f0e2cb91cc7..44877635a09cd4724b0dcfd3290971aa
    {
      context: {
        get serverURL() {
+diff --git a/src/service/akismet.js b/src/service/akismet.js
+index 1cc7389d0eea49914d655e6e88d0b2ce697b721e..52bfc23c426c9eba3e481e6d3c310964722f552e 100644
+--- a/src/service/akismet.js
++++ b/src/service/akismet.js
+@@ -13,30 +13,29 @@ module.exports = function (comment, blog) {
+     return Promise.resolve(false);
+   }
+ 
+-  return new Promise(function (resolve, reject) {
+-    const akismet = Akismet.client({ blog, apiKey: AKISMET_KEY });
++  const akismet = Akismet.client({ blog, apiKey: AKISMET_KEY, port: 443 });
+ 
+-    akismet.verifyKey(function (err, verifyKey) {
+-      if (err) {
+-        return reject(err);
+-      } else if (!verifyKey) {
+-        return reject(new Error('Akismet API_KEY verify failed!'));
++  return akismet
++    .verifyKey()
++    .then(({ err: verifyErr, isValid }) => {
++      if (verifyErr) {
++        return Promise.reject(verifyErr);
++      } else if (!isValid) {
++        return Promise.reject(new Error('Akismet API_KEY verify failed!'));
+       }
+-
+-      akismet.checkComment(
+-        {
+-          user_ip: comment.ip,
+-          permalink: SITE_URL + comment.url,
+-          comment_author: comment.nick,
+-          comment_content: comment.comment,
+-        },
+-        function (err, spam) {
+-          if (err) {
+-            return reject(err);
+-          }
+-          resolve(spam);
+-        },
+-      );
++    })
++    .then(() =>
++      akismet.checkComment({
++        user_ip: comment.ip,
++        permalink: SITE_URL + comment.url,
++        comment_author: comment.nick,
++        comment_content: comment.comment,
++      })
++    )
++    .then(({ err: checkErr, isSpam }) => {
++      if (checkErr) {
++        return Promise.reject(err);
++      }
++      return isSpam;
+     });
+-  });
+ };
 diff --git a/src/service/storage/cloudbase.js b/src/service/storage/cloudbase.js
 deleted file mode 100644
 index a32a9ebd2e5a66ff38228458c41fd2e00134afd6..0000000000000000000000000000000000000000

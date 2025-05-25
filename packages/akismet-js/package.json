@@ -21,7 +21,7 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.21",

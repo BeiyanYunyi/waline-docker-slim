@@ -25,7 +25,7 @@ overrides:
 
 patchedDependencies:
   '@waline/vercel':
-    hash: 399ac0e4f1724e0584535b18691e3bfbe940b1fae3e3c9586601de27937db77d
+    hash: 6dd1593ea56af3e67b4fe9fdc18ff84832ff34a1317c44d4caa4887d9591f79a
     path: patches/@waline__vercel.patch
 
 importers:
@@ -37,7 +37,7 @@ importers:
         version: 1.0.0
       '@waline/vercel':
         specifier: ^1.32.3
-        version: 1.32.3(patch_hash=399ac0e4f1724e0584535b18691e3bfbe940b1fae3e3c9586601de27937db77d)
+        version: 1.32.3(patch_hash=6dd1593ea56af3e67b4fe9fdc18ff84832ff34a1317c44d4caa4887d9591f79a)
       thinkjs:
         specifier: ^3.2.15
         version: 3.2.15
@@ -2501,7 +2501,7 @@ snapshots:
 
   '@waline-plugins/privacy@1.0.0': {}
 
-  '@waline/vercel@1.32.3(patch_hash=399ac0e4f1724e0584535b18691e3bfbe940b1fae3e3c9586601de27937db77d)':
+  '@waline/vercel@1.32.3(patch_hash=6dd1593ea56af3e67b4fe9fdc18ff84832ff34a1317c44d4caa4887d9591f79a)':
     dependencies:
       '@koa/cors': 5.0.0
       '@mdit/plugin-katex': 0.8.0(katex@0.16.22)(markdown-it@14.1.0)

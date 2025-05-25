@@ -31,58 +31,40 @@ describe("Akismet", () => {
   };
 
   describe("Verify key", () => {
-    it("should return true if the key is valid", () =>
-      new Promise<void>((resolve) => {
-        client.verifyKey((err, verified) => {
-          expect(err).toBe(null);
-          expect(verified).toBe(true);
-          resolve();
-        });
-      }));
+    it("should return true if the key is valid", async () => {
+      const { err, isValid } = await client.verifyKey();
+      expect(err).toBe(null);
+      expect(isValid).toBe(true);
+    });
 
-    it("should return false if the key is invalid", () =>
-      new Promise<void>((done) => {
-        invalidKeyClient.verifyKey((err, verified) => {
-          expect(err).toBeNull();
-          expect(verified).toBeFalsy();
-          done();
-        });
-      }));
+    it("should return false if the key is invalid", async () => {
+      const { err, isValid } = await invalidKeyClient.verifyKey();
+      expect(err).toBeNull();
+      expect(isValid).toBeFalsy();
+    });
 
-    it("should generate an error if the host is not available", () =>
-      new Promise<void>((done) => {
-        invalidHostClient.verifyKey((err, verified) => {
-          expect(err).toBeTruthy();
-          done();
-        });
-      }));
+    it("should generate an error if the host is not available", async () => {
+      const { err } = await invalidHostClient.verifyKey();
+      expect(err).toBeTruthy();
+    });
   });
 
   describe("Check comment", () => {
-    it("should return true if the text is spam", () =>
-      new Promise<void>((done) => {
-        client.checkComment(spamObject, (err, spam) => {
-          expect(err).toBeNull();
-          expect(spam).toBeTruthy();
-          done();
-        });
-      }));
+    it("should return true if the text is spam", async () => {
+      const { err, isSpam } = await client.checkComment(spamObject);
+      expect(err).toBeNull();
+      expect(isSpam).toBeTruthy();
+    });
 
-    it("should return false if the text is not spam", () =>
-      new Promise<void>((done) => {
-        client.checkComment(hamObject, (err, spam) => {
-          expect(err).toBeNull();
-          expect(spam).toBeFalsy();
-          done();
-        });
-      }));
+    it("should return false if the text is not spam", async () => {
+      const { err, isSpam } = await client.checkComment(hamObject);
+      expect(err).toBeNull();
+      expect(isSpam).toBeFalsy();
+    });
 
-    it("should generate an error if the host is not available", () =>
-      new Promise<void>((done) => {
-        invalidHostClient.checkComment(spamObject, (err, spam) => {
-          expect(err).toBeTruthy();
-          done();
-        });
-      }));
+    it("should generate an error if the host is not available", async () => {
+      const { err } = await invalidHostClient.checkComment(spamObject);
+      expect(err).toBeTruthy();
+    });
   });
 });
