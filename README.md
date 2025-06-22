@@ -14,7 +14,7 @@ Since we use SQLite, we don't need the `leancloud-storage`, `@cloudbase/node-sdk
 
 ### Network
 
-As we use Node v22, we don't need `node-fetch`. `akismet` uses `request`, which is deprecated. `node-fetch` and `request` are removed, and `akismet` is rewritten at `packages/akismet-js` to remove the `request` dependency.
+As we use Node v24, we don't need `node-fetch`. `akismet` uses `request`, which is deprecated. `node-fetch` and `request` are removed, and `akismet` is rewritten at `packages/akismet-js` to remove the `request` dependency.
 
 ### Other
 

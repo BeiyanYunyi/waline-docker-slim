@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "nodenext",
     "declaration": true,
-    "lib": ["es2015", "dom"],
+    "lib": ["ESNext", "dom"],
     "outDir": "lib",
     "strict": true
   },

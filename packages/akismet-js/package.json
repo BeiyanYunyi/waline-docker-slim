@@ -18,11 +18,11 @@
   "bugs": {
     "url": "https://github.com/oozcitak/akismet-js/issues"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./src/index.ts",
   "engines": {
     "node": ">=18.0.0"
   },
+  "type": "module",
   "devDependencies": {
     "@types/node": "^22.15.21",
     "@vitest/coverage-v8": "3.1.4",
@@ -31,7 +31,6 @@
     "vitest": "^3.1.4"
   },
   "scripts": {
-    "build": "tsc",
     "test": "vitest --coverage"
   }
 }
