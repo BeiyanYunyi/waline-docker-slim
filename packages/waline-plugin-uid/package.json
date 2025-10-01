@@ -11,8 +11,8 @@
   "type": "module",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@types/koa": "^2.15.0",
-    "typescript": "^5.9.2"
+    "@types/koa": "^3.0.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@node-rs/jsonwebtoken": "^0.5.9"
