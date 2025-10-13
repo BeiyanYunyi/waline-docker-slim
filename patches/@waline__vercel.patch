@@ -1,15 +1,14 @@
 diff --git a/src/config/extend.js b/src/config/extend.js
-index 80a472dab22bc4b2929066670e673f0e2cb91cc7..44877635a09cd4724b0dcfd3290971aae4b73c02 100644
+index cf939611277d45da617a8337d8181a32f9278601..40b9f6f2c66b314553a857554674698ed2ce5a62 100644
 --- a/src/config/extend.js
 +++ b/src/config/extend.js
-@@ -1,6 +1,5 @@
- const fetch = require('node-fetch');
+@@ -1,5 +1,4 @@
  const Model = require('think-model');
 -const Mongo = require('think-mongo');
  
  const { isNetlify, netlifyFunctionPrefix } = require('./netlify');
  
-@@ -8,7 +7,6 @@ const isDeta = think.env === 'deta' || process.env.DETA_RUNTIME === 'true';
+@@ -7,7 +6,6 @@ const isDeta = think.env === 'deta' || process.env.DETA_RUNTIME === 'true';
  
  module.exports = [
    Model(think.app),
@@ -79,7 +78,7 @@ deleted file mode 100644
 index a32a9ebd2e5a66ff38228458c41fd2e00134afd6..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/deta.js b/src/service/storage/deta.js
 deleted file mode 100644
-index d8a83435852661fdbc069904a002929ea5d3e3a6..0000000000000000000000000000000000000000
+index 7fba3736b9c53e7c1a01557050e2c9858ba6db53..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/leancloud.js b/src/service/storage/leancloud.js
 deleted file mode 100644
 index bb52b92b1ccb91d7e0f479e4ab070295f8fe9f29..0000000000000000000000000000000000000000
@@ -88,7 +87,7 @@ deleted file mode 100644
 index 975203dd28622a7017ec37fdae5accb49886d628..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/postgresql.js b/src/service/storage/postgresql.js
 deleted file mode 100644
-index 6b9d78aa665643e693afd06975cf581d9c7145d2..0000000000000000000000000000000000000000
+index df5a6ccfd0a06d077747ea67cdedf8b57b4f1670..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/tidb.js b/src/service/storage/tidb.js
 deleted file mode 100644
 index 24444ae8e21cc063f22c97360901272431635fe6..0000000000000000000000000000000000000000

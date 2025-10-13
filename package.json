@@ -4,13 +4,16 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.32.3",
+    "@waline/vercel": "^1.32.4",
     "thinkjs": "^3.2.15",
     "waline-plugin-uid": "workspace:*"
   },
   "scripts": {
     "start": "node index.js",
     "build": "pnpm --filter \"*\" --if-present build"
+  },
+  "engines": {
+    "node": "^24.0.0"
   },
   "pnpm": {
     "overrides": {
@@ -30,7 +33,11 @@
       "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
       "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
-      "akismet": "./packages/akismet-js"
+      "akismet": "./packages/akismet-js",
+      "@mdit/plugin-katex": "0.23.1",
+      "@mdit/plugin-mathjax": "0.23.1",
+      "@mdit/plugin-sub": "0.22.1",
+      "@mdit/plugin-sup": "0.22.1"
     },
     "onlyBuiltDependencies": [
       "esbuild",
@@ -40,8 +47,8 @@
       "@waline/vercel": "patches/@waline__vercel.patch"
     }
   },
-  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef",
+  "packageManager": "pnpm@10.18.2+sha512.9fb969fa749b3ade6035e0f109f0b8a60b5d08a1a87fdf72e337da90dcc93336e2280ca4e44f2358a649b83c17959e9993e777c2080879f3801e6f0d999ad3dd",
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4"
+    "@biomejs/biome": "^2.2.5"
   }
 }
