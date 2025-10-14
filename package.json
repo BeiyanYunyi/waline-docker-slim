@@ -28,12 +28,12 @@
       "think-model-postgresql": "./packages/placebo",
       "think-model-mysql": "./packages/placebo",
       "think-model-mysql2": "./packages/placebo",
-      "node-fetch": "./packages/placebo",
       "think-mongo": "-",
       "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
       "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
-      "akismet": "./packages/akismet-js"
+      "akismet": "./packages/akismet-js",
+      "hasown": "npm:@nolyfill/hasown@^1"
     },
     "onlyBuiltDependencies": [
       "esbuild",
