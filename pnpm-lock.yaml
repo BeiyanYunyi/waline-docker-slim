@@ -22,10 +22,6 @@ overrides:
   safe-buffer: npm:@nolyfill/safe-buffer@^1
   safer-buffer: npm:@nolyfill/safer-buffer@^1
   akismet: ./packages/akismet-js
-  '@mdit/plugin-katex': 0.23.1
-  '@mdit/plugin-mathjax': 0.23.1
-  '@mdit/plugin-sub': 0.22.1
-  '@mdit/plugin-sup': 0.22.1
 
 patchedDependencies:
   '@waline/vercel':
@@ -40,8 +36,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       '@waline/vercel':
-        specifier: ^1.32.4
-        version: 1.32.4(patch_hash=148abe3a2a58affb25dfc6e8efe640b52f545b6d1cb53810482631cf53cce11c)(postcss@8.5.6)
+        specifier: ^1.32.7
+        version: 1.32.7(patch_hash=148abe3a2a58affb25dfc6e8efe640b52f545b6d1cb53810482631cf53cce11c)(postcss@8.5.6)
       thinkjs:
         specifier: ^3.2.15
         version: 3.2.15
@@ -50,17 +46,17 @@ importers:
         version: link:packages/waline-plugin-uid
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.2.5
-        version: 2.2.5
+        specifier: ^2.2.6
+        version: 2.2.6
 
   packages/akismet-js:
     devDependencies:
       '@types/node':
-        specifier: ^24.6.1
-        version: 24.6.1
+        specifier: ^24.7.2
+        version: 24.7.2
       '@vitest/coverage-v8':
         specifier: 3.2.4
-        version: 3.2.4(vitest@3.2.4(@types/node@24.6.1)(jsdom@27.0.0(postcss@8.5.6)))
+        version: 3.2.4(vitest@3.2.4(@types/node@24.7.2)(jsdom@27.0.0(postcss@8.5.6)))
       dotenv:
         specifier: 17.2.3
         version: 17.2.3
@@ -69,7 +65,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@24.6.1)(jsdom@27.0.0(postcss@8.5.6))
+        version: 3.2.4(@types/node@24.7.2)(jsdom@27.0.0(postcss@8.5.6))
 
   packages/placebo: {}
 
@@ -122,55 +118,55 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@biomejs/biome@2.2.5':
-    resolution: {integrity: sha512-zcIi+163Rc3HtyHbEO7CjeHq8DjQRs40HsGbW6vx2WI0tg8mYQOPouhvHSyEnCBAorfYNnKdR64/IxO7xQ5faw==}
+  '@biomejs/biome@2.2.6':
+    resolution: {integrity: sha512-yKTCNGhek0rL5OEW1jbLeZX8LHaM8yk7+3JRGv08my+gkpmtb5dDE+54r2ZjZx0ediFEn1pYBOJSmOdDP9xtFw==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.2.5':
-    resolution: {integrity: sha512-MYT+nZ38wEIWVcL5xLyOhYQQ7nlWD0b/4mgATW2c8dvq7R4OQjt/XGXFkXrmtWmQofaIM14L7V8qIz/M+bx5QQ==}
+  '@biomejs/cli-darwin-arm64@2.2.6':
+    resolution: {integrity: sha512-UZPmn3M45CjTYulgcrFJFZv7YmK3pTxTJDrFYlNElT2FNnkkX4fsxjExTSMeWKQYoZjvekpH5cvrYZZlWu3yfA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.2.5':
-    resolution: {integrity: sha512-FLIEl73fv0R7dI10EnEiZLw+IMz3mWLnF95ASDI0kbx6DDLJjWxE5JxxBfmG+udz1hIDd3fr5wsuP7nwuTRdAg==}
+  '@biomejs/cli-darwin-x64@2.2.6':
+    resolution: {integrity: sha512-HOUIquhHVgh/jvxyClpwlpl/oeMqntlteL89YqjuFDiZ091P0vhHccwz+8muu3nTyHWM5FQslt+4Jdcd67+xWQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.2.5':
-    resolution: {integrity: sha512-5Ov2wgAFwqDvQiESnu7b9ufD1faRa+40uwrohgBopeY84El2TnBDoMNXx6iuQdreoFGjwW8vH6k68G21EpNERw==}
+  '@biomejs/cli-linux-arm64-musl@2.2.6':
+    resolution: {integrity: sha512-TjCenQq3N6g1C+5UT3jE1bIiJb5MWQvulpUngTIpFsL4StVAUXucWD0SL9MCW89Tm6awWfeXBbZBAhJwjyFbRQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-arm64@2.2.5':
-    resolution: {integrity: sha512-5DjiiDfHqGgR2MS9D+AZ8kOfrzTGqLKywn8hoXpXXlJXIECGQ32t+gt/uiS2XyGBM2XQhR6ztUvbjZWeccFMoQ==}
+  '@biomejs/cli-linux-arm64@2.2.6':
+    resolution: {integrity: sha512-BpGtuMJGN+o8pQjvYsUKZ+4JEErxdSmcRD/JG3mXoWc6zrcA7OkuyGFN1mDggO0Q1n7qXxo/PcupHk8gzijt5g==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64-musl@2.2.5':
-    resolution: {integrity: sha512-AVqLCDb/6K7aPNIcxHaTQj01sl1m989CJIQFQEaiQkGr2EQwyOpaATJ473h+nXDUuAcREhccfRpe/tu+0wu0eQ==}
+  '@biomejs/cli-linux-x64-musl@2.2.6':
+    resolution: {integrity: sha512-1ZcBux8zVM3JhWN2ZCPaYf0+ogxXG316uaoXJdgoPZcdK/rmRcRY7PqHdAos2ExzvjIdvhQp72UcveI98hgOog==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64@2.2.5':
-    resolution: {integrity: sha512-fq9meKm1AEXeAWan3uCg6XSP5ObA6F/Ovm89TwaMiy1DNIwdgxPkNwxlXJX8iM6oRbFysYeGnT0OG8diCWb9ew==}
+  '@biomejs/cli-linux-x64@2.2.6':
+    resolution: {integrity: sha512-1HaM/dpI/1Z68zp8ZdT6EiBq+/O/z97a2AiHMl+VAdv5/ELckFt9EvRb8hDHpk8hUMoz03gXkC7VPXOVtU7faA==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-win32-arm64@2.2.5':
-    resolution: {integrity: sha512-xaOIad4wBambwJa6mdp1FigYSIF9i7PCqRbvBqtIi9y29QtPVQ13sDGtUnsRoe6SjL10auMzQ6YAe+B3RpZXVg==}
+  '@biomejs/cli-win32-arm64@2.2.6':
+    resolution: {integrity: sha512-h3A88G8PGM1ryTeZyLlSdfC/gz3e95EJw9BZmA6Po412DRqwqPBa2Y9U+4ZSGUAXCsnSQE00jLV8Pyrh0d+jQw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.2.5':
-    resolution: {integrity: sha512-F/jhuXCssPFAuciMhHKk00xnCAxJRS/pUzVfXYmOMUp//XW7mO6QeCjsjvnm8L4AO/dG2VOB0O+fJPiJ2uXtIw==}
+  '@biomejs/cli-win32-x64@2.2.6':
+    resolution: {integrity: sha512-yx0CqeOhPjYQ5ZXgPfu8QYkgBhVJyvWe36as7jRuPrKPO5ylVDfwVtPQ+K/mooNTADW0IhxOZm3aPu16dP8yNQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -402,8 +398,8 @@ packages:
     resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
     engines: {node: '>= 14.0.0'}
 
-  '@mdit/helper@0.22.1':
-    resolution: {integrity: sha512-lDpajcdAk84aYCNAM/Mi3djw38DJq7ocLw5VOSMu/u2YKX3/OD37a6Qb59in8Uyp4SiAbQoSHa8px6hgHEpB5g==}
+  '@mdit/helper@0.22.3-cjs.0':
+    resolution: {integrity: sha512-WsOE13wgQJP3/P8K9pgL1aCMwHkC6dtoRJe6KiWyuDAIHzxXptNhpAsoSYAeZHKWliHS9/hheKn5J2JfVZdKAQ==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -411,8 +407,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-katex@0.23.1':
-    resolution: {integrity: sha512-4hyeDzjIqBplwS/NOGHGkxraE3jIi3KJ+WBKmG/dMDvEO+oYovVXY0pTW7/d0SH/4vqhRp6stQ5z+rgPAovhOg==}
+  '@mdit/plugin-katex@0.23.4-cjs.0':
+    resolution: {integrity: sha512-3isWorMZ6TpynPwEw5tsKpS2ntgGyRI2SGVZxI/xe1anacEt9hq7SXwDZANeahw/2VtbbeDUCSLmuWCUwGZIlw==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -420,8 +416,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-mathjax@0.23.1':
-    resolution: {integrity: sha512-GV2NKG+GIUAKyuf74GViyV1pIuMZMcDZ+aZTcuFX71n0zVRJyI4d0KAa/k2C/7u4vApvKAkizkiJB5zrJK7fiw==}
+  '@mdit/plugin-mathjax@0.23.4-cjs.0':
+    resolution: {integrity: sha512-+7pZhht/Ls3nkM06ZV/5+w7UA8h8zQlTkFuStWC1rhRPsnYftOArlpr72fKzHIXjGLw30Rh74bGs4Ngrit8ZKQ==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -429,8 +425,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-sub@0.22.1':
-    resolution: {integrity: sha512-ZEEcxk2cB0mRHwBijxCwG8xf3LH/ax2WH+0yMMVaQ4fZuszZzAnHGOlEn/ijLVl2gmSF0lwlJXCz6q7rzi3r0w==}
+  '@mdit/plugin-sub@0.22.5-cjs.0':
+    resolution: {integrity: sha512-Cl0Cir7z45bdlP5ZXhJeDHQwJ1MDwdt+RMAqc/9zIYN6HuAQ0RgF+faPXzpf3VXrRVdE9SvSwME03z6SmewiJA==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -438,8 +434,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-sup@0.22.1':
-    resolution: {integrity: sha512-B0ez+dt1tjX2gxcS6ShF+ddXU6X7wDwVnz1rB4aXo5PhvCRkBWpuXbFJT2gy5TIAG7/B4AHQww2KeEYhd56NUw==}
+  '@mdit/plugin-sup@0.22.5-cjs.0':
+    resolution: {integrity: sha512-KFB1dezd7nHJ3ocOfO9x0jNbT/9LaaMpRXAY7qufvLT8wotLdj0oJflvjG3yS7nyEPkVgIs0OtbNPQj3Hu09cQ==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -447,8 +443,8 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-tex@0.22.1':
-    resolution: {integrity: sha512-sCoOHznJjECeWCd0SggYpiZfwDfGGZ5mN3sKQA9PCHVRRXHh0dEl3wwNNvp/L8f6jZ4SpG5mxtPqBvxlPbE5nw==}
+  '@mdit/plugin-tex@0.22.4-cjs.0':
+    resolution: {integrity: sha512-2tXYRwQMtzzy2tqwxPfRD4C87EXcpiylBZrJ0MbYZvdz/zGUa9yYZw7FapxmQMs4rLGCb8vkkmQ6kQFsJ2bHwQ==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -753,8 +749,8 @@ packages:
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
-  '@types/node@24.6.1':
-    resolution: {integrity: sha512-ljvjjs3DNXummeIaooB4cLBKg2U6SPI6Hjra/9rRIy7CpM0HpLtG9HptkMKAb4HYWy5S7HUvJEuWgr/y0U8SHw==}
+  '@types/node@24.7.2':
+    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
 
   '@types/qs@6.14.0':
     resolution: {integrity: sha512-eOunJqu0K1923aExK6y8p6fsihYEn/BYuQ4g0CxAAgFc4b/ZLN4CrsRZ55srTdqoiLzU2B2evC+apEIxprEzkQ==}
@@ -812,8 +808,8 @@ packages:
   '@waline-plugins/privacy@1.0.0':
     resolution: {integrity: sha512-rgTsHHKD5gv0m2WCDBAtKTZARIXgQb87pxEDpTaEN1zYUeWaSGEha3EJCeD8rgPJO7aWcgKLZ3L7TCvw0P1b5A==}
 
-  '@waline/vercel@1.32.4':
-    resolution: {integrity: sha512-ei6QJr37C3pASEgL7sx248JcB1qegTP6zmlgzQnV12Ast7N2DrbUmtj7Ax58RuYuufW+pcfwI6jds9XzgbYKwA==}
+  '@waline/vercel@1.32.7':
+    resolution: {integrity: sha512-vdZQTU3de1/rBWZGakIK4BZ+XWZk72JRI2ofZI/wmC/IKacjpuO9X89N7Mv0RMIW9c6ZScq4Npek8dqxEJdGAw==}
     engines: {node: '>=20'}
 
   '@xmldom/xmldom@0.9.8':
@@ -1113,8 +1109,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  dompurify@3.2.7:
-    resolution: {integrity: sha512-WhL/YuveyGXJaerVlMYGWhvQswa7myDG17P7Vu65EWC05o8vfeNbvNf4d/BOvH99+ZW+LlQsc1GDKMa1vNK6dw==}
+  dompurify@3.3.0:
+    resolution: {integrity: sha512-r+f6MYR1gGN1eJv0TVQbhA7if/U7P87cdPl3HN5rikqaBSBxLiCb/b9O+2eG0cxz0ghyU+mU1QkbsOwERMYlWQ==}
 
   dotenv@17.2.3:
     resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
@@ -1432,8 +1428,8 @@ packages:
   jws@3.2.2:
     resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
 
-  katex@0.16.22:
-    resolution: {integrity: sha512-XCHRdUw4lf3SKBaJe4EvgqIuWwkPSo9XoeO8GjQW94Bp7TWv9hNhzZjZ+OH9yf1UmLygb7DIT5GSFQiyt16zYg==}
+  katex@0.16.25:
+    resolution: {integrity: sha512-woHRUZ/iF23GBP1dkDQMh1QBad9dmr8/PAwNA54VrSOVYgI12MAcE14TqnDdQOdzyEonGzMepYnqBMYdsoAr8Q==}
     hasBin: true
 
   keygrip@1.1.0:
@@ -2191,8 +2187,8 @@ packages:
   uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
-  undici-types@7.13.0:
-    resolution: {integrity: sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ==}
+  undici-types@7.14.0:
+    resolution: {integrity: sha512-QQiYxHuyZ9gQUIrmPo3IA+hUl4KYk8uSA7cHrcKd/l3p1OTpZcM0Tbp9x7FAtXdAYhlasd60ncPpgu6ihG6TOA==}
 
   unique-filename@1.1.1:
     resolution: {integrity: sha512-Vmp0jIp2ln35UTXuryvjzkjGdRyf9b2lTXuSYUiPmzRcl3FDtYqAwOnTJkAngD9SWhnoJzDbTKwaOrZ+STtxNQ==}
@@ -2421,39 +2417,39 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@biomejs/biome@2.2.5':
+  '@biomejs/biome@2.2.6':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.2.5
-      '@biomejs/cli-darwin-x64': 2.2.5
-      '@biomejs/cli-linux-arm64': 2.2.5
-      '@biomejs/cli-linux-arm64-musl': 2.2.5
-      '@biomejs/cli-linux-x64': 2.2.5
-      '@biomejs/cli-linux-x64-musl': 2.2.5
-      '@biomejs/cli-win32-arm64': 2.2.5
-      '@biomejs/cli-win32-x64': 2.2.5
+      '@biomejs/cli-darwin-arm64': 2.2.6
+      '@biomejs/cli-darwin-x64': 2.2.6
+      '@biomejs/cli-linux-arm64': 2.2.6
+      '@biomejs/cli-linux-arm64-musl': 2.2.6
+      '@biomejs/cli-linux-x64': 2.2.6
+      '@biomejs/cli-linux-x64-musl': 2.2.6
+      '@biomejs/cli-win32-arm64': 2.2.6
+      '@biomejs/cli-win32-x64': 2.2.6
 
-  '@biomejs/cli-darwin-arm64@2.2.5':
+  '@biomejs/cli-darwin-arm64@2.2.6':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.2.5':
+  '@biomejs/cli-darwin-x64@2.2.6':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.2.5':
+  '@biomejs/cli-linux-arm64-musl@2.2.6':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.2.5':
+  '@biomejs/cli-linux-arm64@2.2.6':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.2.5':
+  '@biomejs/cli-linux-x64-musl@2.2.6':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.2.5':
+  '@biomejs/cli-linux-x64@2.2.6':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.2.5':
+  '@biomejs/cli-win32-arm64@2.2.6':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.2.5':
+  '@biomejs/cli-win32-x64@2.2.6':
     optional: true
 
   '@csstools/color-helpers@5.1.0': {}
@@ -2619,45 +2615,45 @@ snapshots:
     dependencies:
       vary: 1.1.2
 
-  '@mdit/helper@0.22.1(markdown-it@14.1.0)':
+  '@mdit/helper@0.22.3-cjs.0(markdown-it@14.1.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-katex@0.23.1(markdown-it@14.1.0)':
+  '@mdit/plugin-katex@0.23.4-cjs.0(markdown-it@14.1.0)':
     dependencies:
-      '@mdit/helper': 0.22.1(markdown-it@14.1.0)
-      '@mdit/plugin-tex': 0.22.1(markdown-it@14.1.0)
+      '@mdit/helper': 0.22.3-cjs.0(markdown-it@14.1.0)
+      '@mdit/plugin-tex': 0.22.4-cjs.0(markdown-it@14.1.0)
       '@types/markdown-it': 14.1.2
-      katex: 0.16.22
+      katex: 0.16.25
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-mathjax@0.23.1(markdown-it@14.1.0)':
+  '@mdit/plugin-mathjax@0.23.4-cjs.0(markdown-it@14.1.0)':
     dependencies:
-      '@mdit/plugin-tex': 0.22.1(markdown-it@14.1.0)
+      '@mdit/plugin-tex': 0.22.4-cjs.0(markdown-it@14.1.0)
       '@types/markdown-it': 14.1.2
       mathjax-full: 3.2.2
       upath: 2.0.1
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-sub@0.22.1(markdown-it@14.1.0)':
+  '@mdit/plugin-sub@0.22.5-cjs.0(markdown-it@14.1.0)':
     dependencies:
-      '@mdit/helper': 0.22.1(markdown-it@14.1.0)
+      '@mdit/helper': 0.22.3-cjs.0(markdown-it@14.1.0)
       '@types/markdown-it': 14.1.2
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-sup@0.22.1(markdown-it@14.1.0)':
+  '@mdit/plugin-sup@0.22.5-cjs.0(markdown-it@14.1.0)':
     dependencies:
-      '@mdit/helper': 0.22.1(markdown-it@14.1.0)
+      '@mdit/helper': 0.22.3-cjs.0(markdown-it@14.1.0)
       '@types/markdown-it': 14.1.2
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-tex@0.22.1(markdown-it@14.1.0)':
+  '@mdit/plugin-tex@0.22.4-cjs.0(markdown-it@14.1.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
     optionalDependencies:
@@ -2836,12 +2832,12 @@ snapshots:
 
   '@types/accepts@1.3.7':
     dependencies:
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/chai@5.2.2':
     dependencies:
@@ -2849,7 +2845,7 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/content-disposition@0.5.9': {}
 
@@ -2858,7 +2854,7 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/express': 5.0.3
       '@types/keygrip': 1.0.6
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/deep-eql@4.0.2': {}
 
@@ -2866,7 +2862,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.7':
     dependencies:
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.5
@@ -2896,7 +2892,7 @@ snapshots:
       '@types/http-errors': 2.0.5
       '@types/keygrip': 1.0.6
       '@types/koa-compose': 3.2.8
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/linkify-it@5.0.0': {}
 
@@ -2909,9 +2905,9 @@ snapshots:
 
   '@types/mime@1.3.5': {}
 
-  '@types/node@24.6.1':
+  '@types/node@24.7.2':
     dependencies:
-      undici-types: 7.13.0
+      undici-types: 7.14.0
 
   '@types/qs@6.14.0': {}
 
@@ -2920,18 +2916,18 @@ snapshots:
   '@types/send@0.17.5':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
 
   '@types/serve-static@1.15.8':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
       '@types/send': 0.17.5
 
   '@types/trusted-types@2.0.7':
     optional: true
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/node@24.6.1)(jsdom@27.0.0(postcss@8.5.6)))':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/node@24.7.2)(jsdom@27.0.0(postcss@8.5.6)))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -2946,7 +2942,7 @@ snapshots:
       std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/node@24.6.1)(jsdom@27.0.0(postcss@8.5.6))
+      vitest: 3.2.4(@types/node@24.7.2)(jsdom@27.0.0(postcss@8.5.6))
     transitivePeerDependencies:
       - supports-color
 
@@ -2958,13 +2954,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.0.1(@types/node@24.6.1))':
+  '@vitest/mocker@3.2.4(vite@7.0.1(@types/node@24.7.2))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 7.0.1(@types/node@24.6.1)
+      vite: 7.0.1(@types/node@24.7.2)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -2994,15 +2990,15 @@ snapshots:
 
   '@waline-plugins/privacy@1.0.0': {}
 
-  '@waline/vercel@1.32.4(patch_hash=148abe3a2a58affb25dfc6e8efe640b52f545b6d1cb53810482631cf53cce11c)(postcss@8.5.6)':
+  '@waline/vercel@1.32.7(patch_hash=148abe3a2a58affb25dfc6e8efe640b52f545b6d1cb53810482631cf53cce11c)(postcss@8.5.6)':
     dependencies:
       '@koa/cors': 5.0.0
-      '@mdit/plugin-katex': 0.23.1(markdown-it@14.1.0)
-      '@mdit/plugin-mathjax': 0.23.1(markdown-it@14.1.0)
-      '@mdit/plugin-sub': 0.22.1(markdown-it@14.1.0)
-      '@mdit/plugin-sup': 0.22.1(markdown-it@14.1.0)
+      '@mdit/plugin-katex': 0.23.4-cjs.0(markdown-it@14.1.0)
+      '@mdit/plugin-mathjax': 0.23.4-cjs.0(markdown-it@14.1.0)
+      '@mdit/plugin-sub': 0.22.5-cjs.0(markdown-it@14.1.0)
+      '@mdit/plugin-sup': 0.22.5-cjs.0(markdown-it@14.1.0)
       akismet: link:packages/akismet-js
-      dompurify: 3.2.7
+      dompurify: 3.3.0
       dy-node-ip2region: 1.0.1
       fast-csv: 5.0.5
       form-data: 4.0.4
@@ -3308,7 +3304,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  dompurify@3.2.7:
+  dompurify@3.3.0:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -3694,7 +3690,7 @@ snapshots:
       jwa: 1.4.2
       safe-buffer: '@nolyfill/safe-buffer@1.0.44'
 
-  katex@0.16.22:
+  katex@0.16.25:
     dependencies:
       commander: 8.3.0
 
@@ -4642,7 +4638,7 @@ snapshots:
 
   uc.micro@2.1.0: {}
 
-  undici-types@7.13.0: {}
+  undici-types@7.14.0: {}
 
   unique-filename@1.1.1:
     dependencies:
@@ -4668,13 +4664,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-node@3.2.4(@types/node@24.6.1):
+  vite-node@3.2.4(@types/node@24.7.2):
     dependencies:
       cac: 6.7.14
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.0.1(@types/node@24.6.1)
+      vite: 7.0.1(@types/node@24.7.2)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -4689,7 +4685,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.0.1(@types/node@24.6.1):
+  vite@7.0.1(@types/node@24.7.2):
     dependencies:
       esbuild: 0.25.5
       fdir: 6.4.6(picomatch@4.0.2)
@@ -4698,14 +4694,14 @@ snapshots:
       rollup: 4.44.1
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
       fsevents: 2.3.3
 
-  vitest@3.2.4(@types/node@24.6.1)(jsdom@27.0.0(postcss@8.5.6)):
+  vitest@3.2.4(@types/node@24.7.2)(jsdom@27.0.0(postcss@8.5.6)):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.0.1(@types/node@24.6.1))
+      '@vitest/mocker': 3.2.4(vite@7.0.1(@types/node@24.7.2))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -4723,11 +4719,11 @@ snapshots:
       tinyglobby: 0.2.14
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.0.1(@types/node@24.6.1)
-      vite-node: 3.2.4(@types/node@24.6.1)
+      vite: 7.0.1(@types/node@24.7.2)
+      vite-node: 3.2.4(@types/node@24.7.2)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 24.6.1
+      '@types/node': 24.7.2
       jsdom: 27.0.0(postcss@8.5.6)
     transitivePeerDependencies:
       - jiti
