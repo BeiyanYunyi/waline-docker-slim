@@ -4,6 +4,18 @@ A slim and modern waline server image with SQLite.
 
 The optimization is highly opinionated, and it may not suit all use cases. If you need more features, consider [using the full waline image](https://waline.js.org/guide/deploy/vps.html#docker-%E9%83%A8%E7%BD%B2).
 
+## Usage
+
+Download the `compose.yaml` file, create a `data` folder beside it. Then create a `banned-uids.json` file inside the `data` folder with content `[]`. Don't forget to download [waline's SQLite db file](https://github.com/walinejs/waline/blob/main/assets/waline.sqlite) and put it in the `data` folder.
+
+If you are not me, you will not need my anti-stalker API. So you should remove the `CLASS_IT_UP_API` environment variable in the `compose.yaml` file.
+
+Finally, run:
+
+```bash
+docker-compose up -d
+```
+
 ## Removed and rewritten Dependencies
 
 Unnecessary dependencies are removed to reduce the image size. The number of dependencies is reduced from 540 to 351, and the size of node_modules is reduced from 180.4MB to 98.74MB.
