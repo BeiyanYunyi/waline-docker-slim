@@ -19,3 +19,17 @@ As we use Node v24, we don't need `node-fetch`. `akismet` uses `request`, which 
 ### Other
 
 I also used [nolyfill](https://github.com/sukkaw/nolyfill) to remove unnecessary polyfills.
+
+Use KaTeX instead of MathJax for rendering math formulas. MathJax is large and slow, and KaTeX is a good alternative in lightweight use cases (such as my blog comment area). This reduces the node_modules size of 40MB.
+
+You should add these css to your frontend to make math formulas be rendered correctly in Firefox due to its [behavior](https://developer.mozilla.org/en-US/docs/Web/MathML/Reference/Element/semantics) of handling MathML tags:
+
+```css
+span.katex math {
+  font-size: 0;
+}
+
+span.katex math > * {
+  font-size: 1rem; /* or any other size you want */
+}
+```

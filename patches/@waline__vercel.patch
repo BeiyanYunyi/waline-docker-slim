@@ -73,6 +73,39 @@ index 1cc7389d0eea49914d655e6e88d0b2ce697b721e..52bfc23c426c9eba3e481e6d3c310964
      });
 -  });
  };
+diff --git a/src/service/markdown/index.js b/src/service/markdown/index.js
+index 4cc808b7ad03089c4a213af5a918cf0811a5431b..e6a8273399721e1be61a07b763fff6463e772e5f 100644
+--- a/src/service/markdown/index.js
++++ b/src/service/markdown/index.js
+@@ -5,7 +5,6 @@ const MarkdownIt = require('markdown-it');
+ const emojiPlugin = require('markdown-it-emoji');
+ 
+ const { resolveHighlighter } = require('./highlight.js');
+-const { mathjaxPlugin } = require('./mathjax.js');
+ const { sanitize } = require('./xss.js');
+ 
+ const getMarkdownParser = () => {
+@@ -31,7 +30,7 @@ const getMarkdownParser = () => {
+     html: true,
+   });
+ 
+-  const { emoji, tex, mathjax, katex, sub, sup } = plugin;
++  const { emoji, tex, katex, sub, sup } = plugin;
+ 
+   // parse emoji
+   if (emoji !== false) {
+@@ -55,7 +54,7 @@ const getMarkdownParser = () => {
+       output: 'mathml',
+     });
+   } else if (tex !== false) {
+-    markdownIt.use(mathjaxPlugin, mathjax);
++    throw new Error(`tex plugin "${tex}" is not supported`);
+   }
+ 
+   return (content) => sanitize(markdownIt.render(content));
+diff --git a/src/service/markdown/mathjax.js b/src/service/markdown/mathjax.js
+deleted file mode 100644
+index 24007229b371a991f9297527af387f2f32a507eb..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/cloudbase.js b/src/service/storage/cloudbase.js
 deleted file mode 100644
 index a32a9ebd2e5a66ff38228458c41fd2e00134afd6..0000000000000000000000000000000000000000

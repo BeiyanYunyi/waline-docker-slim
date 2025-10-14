@@ -33,7 +33,9 @@
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
       "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
       "akismet": "./packages/akismet-js",
-      "hasown": "npm:@nolyfill/hasown@^1"
+      "hasown": "npm:@nolyfill/hasown@^1",
+      "mathjax-full": "-",
+      "@mdit/plugin-mathjax": "-"
     },
     "onlyBuiltDependencies": [
       "esbuild",

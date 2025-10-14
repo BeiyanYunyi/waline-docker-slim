@@ -5,6 +5,7 @@ services:
       context: .
     environment:
       - "SQLITE_PATH=./data"
+      - "MARKDOWN_TEX=katex"
       - "CLASS_IT_UP_API=http://class-it-up:8000/predict"
     env_file:
       - ./.env
