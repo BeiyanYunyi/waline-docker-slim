@@ -1,0 +1,24 @@
+{
+  "name": "think-model-bun-sqlite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "@types/bun": "^1.3.0",
+    "@types/koa": "^3.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "think-debounce": "^1.0.4",
+    "think-helper": "^1.1.4",
+    "think-instance": "^1.0.2",
+    "think-model-abstract": "^1.6.5"
+  }
+}

@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.32.7",
+    "@waline/vercel": "^1.32.8",
     "thinkjs": "4.0.0-alpha.0",
     "waline-plugin-uid": "workspace:*"
   },
@@ -24,23 +24,24 @@
     "is-nan": "npm:@nolyfill/is-nan@^1",
     "isarray": "npm:@nolyfill/isarray@^1",
     "side-channel": "npm:@nolyfill/side-channel@^1",
-    "leancloud-storage": "-",
-    "@cloudbase/node-sdk": "-",
-    "deta": "-",
+    "leancloud-storage": "./packages/placebo",
+    "@cloudbase/node-sdk": "./packages/placebo",
+    "deta": "./packages/placebo",
     "think-model-postgresql": "./packages/placebo",
     "think-model-mysql": "./packages/placebo",
     "think-model-mysql2": "./packages/placebo",
-    "think-mongo": "-",
+    "think-mongo": "./packages/placebo",
     "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
     "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
     "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
     "akismet": "./packages/akismet-js",
+    "think-model-sqlite": "./packages/think-model-bun-sqlite",
     "hasown": "npm:@nolyfill/hasown@^1",
-    "mathjax-full": "-",
-    "@mdit/plugin-mathjax": "-"
+    "mathjax-full": "./packages/placebo",
+    "@mdit/plugin-mathjax": "./packages/placebo"
   },
   "patchedDependencies": {
-    "@waline/vercel@1.32.7": "patches/@waline__vercel.patch"
+    "@waline/vercel@1.32.8": "patches/@waline%2Fvercel@1.32.8.patch"
   },
   "workspaces": [
     "packages/*"
