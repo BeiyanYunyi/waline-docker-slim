@@ -16,9 +16,13 @@ Finally, run:
 docker-compose up -d
 ```
 
+## Alternative Runtime
+
+This image uses [Bun](https://bun.sh/) instead of Node.js. Bun is a modern JavaScript runtime that is faster and more efficient than Node.js. It also has a built-in package manager and SQLite, which reduces the number of dependencies needed.
+
 ## Removed and rewritten Dependencies
 
-Unnecessary dependencies are removed to reduce the image size. The number of dependencies is reduced from 540 to 351, and the size of node_modules is reduced from 180.4MB to 98.74MB.
+Unnecessary dependencies are removed to reduce the image size. The number of dependencies is reduced from 540 to 354, and the size of node_modules is reduced from 180.4MB to 88.6MB.
 
 ### Storage
 
@@ -26,7 +30,7 @@ Since we use SQLite, we don't need the `leancloud-storage`, `@cloudbase/node-sdk
 
 ### Network
 
-As we use Node v24, we don't need `node-fetch`. `akismet` uses `request`, which is deprecated. `node-fetch` and `request` are removed, and `akismet` is rewritten at `packages/akismet-js` to remove the `request` dependency.
+As we use Bun 1.3.0, we don't need `node-fetch`. `akismet` uses `request`, which is deprecated. `node-fetch` and `request` are removed, and `akismet` is rewritten at `packages/akismet-js` to remove the `request` dependency.
 
 ### Other
 
@@ -34,7 +38,7 @@ I also used [nolyfill](https://github.com/sukkaw/nolyfill) to remove unnecessary
 
 Use KaTeX instead of MathJax for rendering math formulas. MathJax is large and slow, and KaTeX is a good alternative in lightweight use cases (such as my blog comment area). This reduces the node_modules size of 40MB.
 
-You should add these css to your frontend to make math formulas be rendered correctly in Firefox due to its [behavior](https://developer.mozilla.org/en-US/docs/Web/MathML/Reference/Element/semantics) of handling MathML tags:
+You should add these css to your frontend code to make math formulas be rendered correctly in Firefox due to its [behavior](https://developer.mozilla.org/en-US/docs/Web/MathML/Reference/Element/semantics) of handling MathML tags, until [walinejs/waline#3238](https://github.com/walinejs/waline/issues/3238) was solved:
 
 ```css
 span.katex math {
