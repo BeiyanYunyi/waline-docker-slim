@@ -5,48 +5,44 @@
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
     "@waline/vercel": "^1.32.7",
-    "thinkjs": "^3.2.15",
+    "thinkjs": "4.0.0-alpha.0",
     "waline-plugin-uid": "workspace:*"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "bun index.js",
     "build": "pnpm --filter \"*\" --if-present build"
   },
   "engines": {
-    "node": "^24.0.0"
+    "bun": "^1.3.0"
   },
-  "pnpm": {
-    "overrides": {
-      "deep-equal": "npm:@nolyfill/deep-equal@^1",
-      "is-generator-function": "npm:@nolyfill/is-generator-function@^1",
-      "is-nan": "npm:@nolyfill/is-nan@^1",
-      "isarray": "npm:@nolyfill/isarray@^1",
-      "side-channel": "npm:@nolyfill/side-channel@^1",
-      "leancloud-storage": "-",
-      "@cloudbase/node-sdk": "-",
-      "deta": "-",
-      "think-model-postgresql": "./packages/placebo",
-      "think-model-mysql": "./packages/placebo",
-      "think-model-mysql2": "./packages/placebo",
-      "think-mongo": "-",
-      "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
-      "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
-      "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
-      "akismet": "./packages/akismet-js",
-      "hasown": "npm:@nolyfill/hasown@^1",
-      "mathjax-full": "-",
-      "@mdit/plugin-mathjax": "-"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sqlite3"
-    ],
-    "patchedDependencies": {
-      "@waline/vercel": "patches/@waline__vercel.patch"
-    }
-  },
-  "packageManager": "pnpm@10.18.2+sha512.9fb969fa749b3ade6035e0f109f0b8a60b5d08a1a87fdf72e337da90dcc93336e2280ca4e44f2358a649b83c17959e9993e777c2080879f3801e6f0d999ad3dd",
   "devDependencies": {
     "@biomejs/biome": "^2.2.6"
-  }
+  },
+  "overrides": {
+    "deep-equal": "npm:@nolyfill/deep-equal@^1",
+    "is-generator-function": "npm:@nolyfill/is-generator-function@^1",
+    "is-nan": "npm:@nolyfill/is-nan@^1",
+    "isarray": "npm:@nolyfill/isarray@^1",
+    "side-channel": "npm:@nolyfill/side-channel@^1",
+    "leancloud-storage": "-",
+    "@cloudbase/node-sdk": "-",
+    "deta": "-",
+    "think-model-postgresql": "./packages/placebo",
+    "think-model-mysql": "./packages/placebo",
+    "think-model-mysql2": "./packages/placebo",
+    "think-mongo": "-",
+    "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
+    "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
+    "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
+    "akismet": "./packages/akismet-js",
+    "hasown": "npm:@nolyfill/hasown@^1",
+    "mathjax-full": "-",
+    "@mdit/plugin-mathjax": "-"
+  },
+  "patchedDependencies": {
+    "@waline/vercel@1.32.7": "patches/@waline__vercel.patch"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

@@ -1,6 +1,8 @@
 import jwt from '@node-rs/jsonwebtoken';
 import type { Middleware } from 'koa';
-import bannedUids from '../../../data/banned-uids.json' with { type: 'json' };
+
+const file = Bun.file('./data/banned-uids.json');
+const bannedUids = await file.json();
 
 if (!process.env.JWT_TOKEN)
   throw new Error(
