@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.32.8",
+    "@waline/vercel": "^1.33.0",
     "thinkjs": "4.0.0-alpha.0",
     "waline-plugin-uid": "workspace:*"
   },
@@ -41,7 +41,7 @@
     "@mdit/plugin-mathjax": "./packages/placebo"
   },
   "patchedDependencies": {
-    "@waline/vercel@1.32.8": "patches/@waline%2Fvercel@1.32.8.patch"
+    "@waline/vercel@1.33.0": "patches/@waline%2Fvercel@1.33.0.patch"
   },
   "workspaces": [
     "packages/*"
