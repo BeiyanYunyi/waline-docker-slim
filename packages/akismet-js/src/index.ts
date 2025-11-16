@@ -1,4 +1,4 @@
-import { format as formatURL } from "url";
+import { format as formatURL } from 'url';
 
 /**
  * Defines the settings for the Akismet client.
@@ -172,7 +172,7 @@ type SubmitCallback = (err: string | null) => void;
 type PostRequestCallback = (
   err: string | null,
   status: number,
-  body: string
+  body: string,
 ) => void;
 
 /**
@@ -193,14 +193,14 @@ export class AkismetClient {
    * @param options - client settings
    */
   constructor(options: AkismetOptions) {
-    this._blog = options.blog || "";
+    this._blog = options.blog || '';
     this._apiKey = options.apiKey;
-    this._host = options.host || "rest.akismet.com";
-    this._endPoint = options.endPoint || this._apiKey + "." + this._host;
+    this._host = options.host || 'rest.akismet.com';
+    this._endPoint = options.endPoint || this._apiKey + '.' + this._host;
     this._port = options.port || 80;
     this._userAgent =
-      options.userAgent || "Generic Node.js/1.0.0 | Akismet/3.1.7";
-    this._charSet = options.charSet || "utf-8";
+      options.userAgent || 'Generic Node.js/1.0.0 | Akismet/3.1.7';
+    this._charSet = options.charSet || 'utf-8';
   }
 
   /**
@@ -212,12 +212,12 @@ export class AkismetClient {
     const options = { api_key: this._apiKey, blog: this._blog };
     const { err, status, body } = await this._postRequest(
       this._host,
-      "/1.1/verify-key",
-      options
+      '/1.1/verify-key',
+      options,
     );
     return {
       err,
-      isValid: status >= 200 && status < 300 && body === "valid",
+      isValid: status >= 200 && status < 300 && body === 'valid',
     };
   }
 
@@ -228,16 +228,16 @@ export class AkismetClient {
    * @param callback - callback function
    */
   public async checkComment(
-    options: AkismetParameters
+    options: AkismetParameters,
   ): Promise<{ err: string | null; isSpam: boolean }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
     const { err, status, body } = await this._postRequest(
       this._endPoint,
-      "/1.1/comment-check",
-      options
+      '/1.1/comment-check',
+      options,
     );
-    return { err, isSpam: status >= 200 && status < 300 && body === "true" };
+    return { err, isSpam: status >= 200 && status < 300 && body === 'true' };
   }
 
   /**
@@ -247,14 +247,14 @@ export class AkismetClient {
    * @param callback - callback function
    */
   public async submitSpam(
-    options: AkismetParameters
+    options: AkismetParameters,
   ): Promise<{ err: string | null }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
     const { err } = await this._postRequest(
       this._endPoint,
-      "/1.1/submit-spam",
-      options
+      '/1.1/submit-spam',
+      options,
     );
     return { err };
   }
@@ -266,14 +266,14 @@ export class AkismetClient {
    * @param callback - callback function
    */
   public async submitHam(
-    options: AkismetParameters
+    options: AkismetParameters,
   ): Promise<{ err: string | null }> {
     options.blog = options.blog || this._blog;
     options.user_agent = options.user_agent || this._userAgent;
     const { err } = await this._postRequest(
       this._endPoint,
-      "/1.1/submit-ham",
-      options
+      '/1.1/submit-ham',
+      options,
     );
     return { err };
   }
@@ -284,10 +284,10 @@ export class AkismetClient {
   private async _postRequest(
     hostname: string,
     path: string,
-    query: { [key: string]: any }
+    query: { [key: string]: any },
   ): Promise<{ err: string | null; status: number; body: string }> {
     const requestUrl = formatURL({
-      protocol: this._port === 443 ? "https" : "http",
+      protocol: this._port === 443 ? 'https' : 'http',
       hostname: hostname,
       pathname: path,
       port: this._port,
@@ -295,24 +295,24 @@ export class AkismetClient {
 
     try {
       const fetchRes = await fetch(requestUrl, {
-        method: "POST",
+        method: 'POST',
         body: new URLSearchParams(query),
         headers: {
-          "content-type":
-            "application/x-www-form-urlencoded; charset=" + this._charSet,
-          "user-agent": this._userAgent,
+          'content-type':
+            'application/x-www-form-urlencoded; charset=' + this._charSet,
+          'user-agent': this._userAgent,
         },
-        mode: "cors",
+        mode: 'cors',
       });
       const text = await fetchRes.text();
       if (!fetchRes.ok) {
         throw new Error(
-          `HTTP error! status: ${fetchRes.status}, body: ${text}`
+          `HTTP error! status: ${fetchRes.status}, body: ${text}`,
         );
       }
       return { err: null, status: fetchRes.status, body: text };
     } catch (e: any) {
-      return { err: e, status: 0, body: "" };
+      return { err: e, status: 0, body: '' };
     }
   }
 }

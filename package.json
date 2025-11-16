@@ -40,7 +40,8 @@
       "hasown": "npm:@nolyfill/hasown@^1",
       "mathjax-full": "-",
       "@mdit/plugin-mathjax": "-",
-      "think-model-sqlite": "./packages/think-model-node-sqlite"
+      "think-model-sqlite": "./packages/think-model-node-sqlite",
+      "dy-node-ip2region": "-"
     },
     "onlyBuiltDependencies": [
       "esbuild",

@@ -1,7 +1,6 @@
 import jwt from '@node-rs/jsonwebtoken';
 import type { Middleware } from 'koa';
-import fs from 'node:fs/promises'
-
+import fs from 'node:fs/promises';
 
 let bannedUids: string[] = [];
 

@@ -29,6 +29,67 @@ index cf939611277d45da617a8337d8181a32f9278601..40b9f6f2c66b314553a857554674698e
    {
      context: {
        get serverURL() {
+diff --git a/src/controller/comment.js b/src/controller/comment.js
+index b68771cb015df80ca9ba7af1dd55ddd0d8e661fe..0e744a146977d43caca9d7562661abbf667acb51 100644
+--- a/src/controller/comment.js
++++ b/src/controller/comment.js
+@@ -49,10 +49,6 @@ async function formatCmt(
+     comment.ip = ip;
+   }
+ 
+-  // administrator can always show region
+-  if (isAdmin || !think.config('disableRegion')) {
+-    comment.addr = await think.ip2region(ip, { depth: isAdmin ? 3 : 1 });
+-  }
+   comment.comment = markdownParser(comment.comment);
+   comment.like = Number(comment.like) || 0;
+ 
+diff --git a/src/extend/think.js b/src/extend/think.js
+index 15d3e22723076af4c6322c88bab37d400ffd9d95..a1b23e2305e2f9c12535d0a325b513d24bc73db5 100644
+--- a/src/extend/think.js
++++ b/src/extend/think.js
+@@ -1,11 +1,8 @@
+-const ip2region = require('dy-node-ip2region');
+ const helper = require('think-helper');
+ const parser = require('ua-parser-js');
+ 
+ const preventMessage = 'PREVENT_NEXT_PROCESS';
+ 
+-const regionSearch = ip2region.create(process.env.IP2REGION_DB);
+-
+ const OS_VERSION_MAP = {
+   Windows: {
+     'NT 11.0': '11',
+@@ -66,29 +63,6 @@ module.exports = {
+       }
+     });
+   },
+-  async ip2region(ip, { depth = 1 }) {
+-    if (!ip || ip.includes(':')) return '';
+-
+-    try {
+-      const search = helper.promisify(regionSearch.btreeSearch, regionSearch);
+-      const result = await search(ip);
+-
+-      if (!result) {
+-        return '';
+-      }
+-      const { region } = result;
+-      const [, , province, city, isp] = region.split('|');
+-      const address = Array.from(
+-        new Set([province, city, isp].filter((v) => v)),
+-      );
+-
+-      return address.slice(0, depth).join(' ');
+-    } catch (err) {
+-      console.log(err);
+-
+-      return '';
+-    }
+-  },
+   uaParser(uaText) {
+     const ua = parser(uaText);
+ 
 diff --git a/src/service/akismet.js b/src/service/akismet.js
 index 1cc7389d0eea49914d655e6e88d0b2ce697b721e..15bca74d9de4e59f6bebc71a31293b7c964ebe75 100644
 --- a/src/service/akismet.js

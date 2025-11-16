@@ -1,9 +1,9 @@
-import thinkInstance from "think-instance";
-import { DatabaseSync } from "node:sqlite";
-import assert from "assert";
-import helper from "think-helper";
-import path from "path";
-import Debounce from "think-debounce";
+import thinkInstance from 'think-instance';
+import { DatabaseSync } from 'node:sqlite';
+import assert from 'assert';
+import helper from 'think-helper';
+import path from 'path';
+import Debounce from 'think-debounce';
 
 interface ISqlOptions {
   execute: boolean;
@@ -14,7 +14,7 @@ interface ISqlOptions {
 const defaultOptions = {
   logger:
     console.log.bind(
-      console
+      console,
     ) /* eslint no-console: ["error", { allow: ["log"] }] */,
   logConnect: true,
 };
@@ -30,10 +30,10 @@ class SQLiteSocket {
     this.debounceInstance = new Debounce();
     this.config = Object.assign({}, defaultOptions, config);
     let savePath = this.config.path as string | boolean;
-    if (savePath === true || savePath === ":memory:") {
-      savePath = ":memory:";
+    if (savePath === true || savePath === ':memory:') {
+      savePath = ':memory:';
     } else {
-      assert(savePath, "config.path must be set");
+      assert(savePath, 'config.path must be set');
       helper.mkdir(savePath);
       savePath = path.join(savePath, `${this.config.database}.sqlite`);
     }
@@ -66,7 +66,7 @@ class SQLiteSocket {
     if (this.config.logSql) {
       const endTime = Date.now();
       this.config.logger(
-        `SQL: ${sqlOptions.sql}, Time: ${endTime - startTime}ms`
+        `SQL: ${sqlOptions.sql}, Time: ${endTime - startTime}ms`,
       );
     }
 

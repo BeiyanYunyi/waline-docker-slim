@@ -25,10 +25,11 @@ overrides:
   mathjax-full: '-'
   '@mdit/plugin-mathjax': '-'
   think-model-sqlite: ./packages/think-model-node-sqlite
+  dy-node-ip2region: '-'
 
 patchedDependencies:
   '@waline/vercel':
-    hash: 856fbfbd567adbaf4a471bdc42c2ba9aef3d869947ec38cee297978ef901995f
+    hash: 3bafe7967b97fd6c0d6fe615682d4de660205e1930382b700810b1dbb6a009b5
     path: patches/@waline__vercel.patch
 
 importers:
@@ -40,7 +41,7 @@ importers:
         version: 1.0.0
       '@waline/vercel':
         specifier: ^1.33.0
-        version: 1.33.0(patch_hash=856fbfbd567adbaf4a471bdc42c2ba9aef3d869947ec38cee297978ef901995f)
+        version: 1.33.0(patch_hash=3bafe7967b97fd6c0d6fe615682d4de660205e1930382b700810b1dbb6a009b5)
       thinkjs:
         specifier: 4.0.0-alpha.0
         version: 4.0.0-alpha.0
@@ -1075,10 +1076,6 @@ packages:
   dotenv@17.2.3:
     resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
-
-  dy-node-ip2region@1.0.1:
-    resolution: {integrity: sha512-umCgWXhY3TfZF1vVB8pKacqKV2F9TIlUH9kazxVnBm6sAz+gCWIy40ccWhHM9/HKyTo0IbDMdJ7fyUNs0BsoRA==}
-    engines: {node: '>=6.0.0'}
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -2604,7 +2601,7 @@ snapshots:
 
   '@waline-plugins/privacy@1.0.0': {}
 
-  '@waline/vercel@1.33.0(patch_hash=856fbfbd567adbaf4a471bdc42c2ba9aef3d869947ec38cee297978ef901995f)':
+  '@waline/vercel@1.33.0(patch_hash=3bafe7967b97fd6c0d6fe615682d4de660205e1930382b700810b1dbb6a009b5)':
     dependencies:
       '@koa/cors': 5.0.0
       '@mdit/plugin-katex': 0.23.4-cjs.0(markdown-it@14.1.0)
@@ -2612,7 +2609,6 @@ snapshots:
       '@mdit/plugin-sup': 0.22.5-cjs.0(markdown-it@14.1.0)
       akismet: link:packages/akismet-js
       dompurify: 3.3.0
-      dy-node-ip2region: 1.0.1
       fast-csv: 5.0.5
       form-data: 4.0.4
       jsdom: 19.0.0
@@ -2832,8 +2828,6 @@ snapshots:
       '@types/trusted-types': 2.0.7
 
   dotenv@17.2.3: {}
-
-  dy-node-ip2region@1.0.1: {}
 
   eastasianwidth@0.2.0: {}
 
