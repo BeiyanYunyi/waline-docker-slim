@@ -1,16 +1,3 @@
-diff --git a/src/config/adapter.js b/src/config/adapter.js
-index f3e397734b3894708b562b36e15c20c7f09cf73b..316f557fa5b5a78f49ebcbbcba161f59eef8dff9 100644
---- a/src/config/adapter.js
-+++ b/src/config/adapter.js
-@@ -6,7 +6,7 @@ const Postgresql = require('think-model-postgresql');
- let Sqlite;
- 
- try {
--  Sqlite = require('think-model-sqlite');
-+  Sqlite = require('think-model-sqlite').default;
- } catch (err) {
-   // eslint-disable-next-line @typescript-eslint/no-extraneous-class
-   Sqlite = class {};
 diff --git a/src/config/extend.js b/src/config/extend.js
 index cf939611277d45da617a8337d8181a32f9278601..40b9f6f2c66b314553a857554674698ed2ce5a62 100644
 --- a/src/config/extend.js

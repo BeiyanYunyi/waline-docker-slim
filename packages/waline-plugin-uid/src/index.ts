@@ -1,8 +1,17 @@
 import jwt from '@node-rs/jsonwebtoken';
 import type { Middleware } from 'koa';
+import fs from 'node:fs/promises'
 
-const file = Bun.file('./data/banned-uids.json');
-const bannedUids = await file.json();
+
+let bannedUids: string[] = [];
+
+try {
+  const data = await fs.readFile('./data/banned-uids.json', 'utf-8');
+  bannedUids = JSON.parse(data);
+} catch (error) {
+  console.error('Failed to load banned UIDs:', error);
+  console.error('Proceeding with an empty banned UIDs list.');
+}
 
 if (!process.env.JWT_TOKEN)
   throw new Error(

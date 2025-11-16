@@ -1,6 +1,8 @@
-FROM oven/bun:1-alpine AS base
-ENV BUN_INSTALL_CACHE_DIR="/bun"
+FROM node:current-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 ENV CI=true
+RUN corepack enable
 COPY . /app
 WORKDIR /app
 
@@ -14,6 +16,6 @@ WORKDIR /app
 FROM base
 # COPY --from=prod-deps /app/node_modules /app/node_modules
 # COPY --from=build /app/packages/akismet-js/lib /app/packages/akismet-js/lib
-RUN --mount=type=cache,id=bun,target=/bun bun install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 EXPOSE 8360
-CMD [ "bun", "index.js" ]
+CMD [ "node", "index.js" ]
