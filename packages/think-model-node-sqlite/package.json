@@ -1,5 +1,5 @@
 {
-  "name": "waline-plugin-uid",
+  "name": "think-model-node-sqlite",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -15,6 +15,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@node-rs/jsonwebtoken": "^0.5.9"
+    "think-debounce": "^1.0.4",
+    "think-helper": "^1.1.4",
+    "think-instance": "^1.0.2",
+    "think-model-abstract": "^1.6.5"
   }
 }

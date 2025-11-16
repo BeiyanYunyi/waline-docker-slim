@@ -16,7 +16,8 @@
     "node": "^25.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.6"
+    "@biomejs/biome": "^2.2.6",
+    "@types/node": "^24.10.1"
   },
   "pnpm": {
     "overrides": {
@@ -38,7 +39,8 @@
       "akismet": "./packages/akismet-js",
       "hasown": "npm:@nolyfill/hasown@^1",
       "mathjax-full": "-",
-      "@mdit/plugin-mathjax": "-"
+      "@mdit/plugin-mathjax": "-",
+      "think-model-sqlite": "./packages/think-model-node-sqlite"
     },
     "onlyBuiltDependencies": [
       "esbuild",
