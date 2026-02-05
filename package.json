@@ -4,7 +4,7 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.34.2",
+    "@waline/vercel": "^1.36.4",
     "thinkjs": "4.0.0-alpha.0",
     "waline-plugin-uid": "workspace:*"
   },
@@ -16,8 +16,8 @@
     "node": "^25.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.10",
-    "@types/node": "^25.0.3"
+    "@biomejs/biome": "^2.3.14",
+    "@types/node": "^25.2.0"
   },
   "pnpm": {
     "overrides": {
@@ -41,7 +41,8 @@
       "mathjax-full": "-",
       "@mdit/plugin-mathjax": "-",
       "think-model-sqlite": "./packages/think-model-node-sqlite",
-      "dy-node-ip2region": "-"
+      "dy-node-ip2region": "-",
+      "abab": "npm:@nolyfill/abab@^1"
     },
     "onlyBuiltDependencies": [
       "esbuild",
