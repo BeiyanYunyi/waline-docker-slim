@@ -4,8 +4,8 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.39.3",
-    "thinkjs": "4.0.0-alpha.0",
+    "@waline/vercel": "^1.41.3",
+    "thinkjs": "4.0.0",
     "waline-plugin-class-it-up": "workspace:*",
     "waline-plugin-uid": "workspace:*"
   },
@@ -14,44 +14,11 @@
     "build": "pnpm --filter \"*\" --if-present build"
   },
   "engines": {
-    "node": "^25.0.0"
+    "node": "^26.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.9",
-    "@types/node": "^25.5.0"
+    "@biomejs/biome": "^2.5.6",
+    "@types/node": "^26.1.2"
   },
-  "pnpm": {
-    "overrides": {
-      "deep-equal": "npm:@nolyfill/deep-equal@^1",
-      "is-generator-function": "npm:@nolyfill/is-generator-function@^1",
-      "is-nan": "npm:@nolyfill/is-nan@^1",
-      "isarray": "npm:@nolyfill/isarray@^1",
-      "side-channel": "npm:@nolyfill/side-channel@^1",
-      "leancloud-storage": "-",
-      "@cloudbase/node-sdk": "-",
-      "deta": "-",
-      "think-model-postgresql": "./packages/placebo",
-      "think-model-mysql": "./packages/placebo",
-      "think-model-mysql2": "./packages/placebo",
-      "think-mongo": "-",
-      "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1",
-      "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
-      "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
-      "akismet": "./packages/akismet-js",
-      "hasown": "npm:@nolyfill/hasown@^1",
-      "mathjax-full": "-",
-      "@mdit/plugin-mathjax": "-",
-      "think-model-sqlite": "./packages/think-model-node-sqlite",
-      "dy-node-ip2region": "-",
-      "abab": "npm:@nolyfill/abab@^1"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sqlite3"
-    ],
-    "patchedDependencies": {
-      "@waline/vercel": "patches/@waline__vercel.patch"
-    }
-  },
-  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }

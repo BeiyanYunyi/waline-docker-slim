@@ -24,10 +24,10 @@
   },
   "type": "module",
   "devDependencies": {
-    "@vitest/coverage-v8": "4.0.16",
-    "dotenv": "17.2.3",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "@vitest/coverage-v8": "4.1.10",
+    "dotenv": "17.4.2",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   },
   "scripts": {
     "test": "vitest --coverage"

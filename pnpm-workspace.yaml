@@ -1,2 +1,30 @@
 packages:
   - "packages/*"
+allowBuilds:
+  esbuild: true
+overrides:
+  "deep-equal": "npm:@nolyfill/deep-equal@^1"
+  "is-generator-function": "npm:@nolyfill/is-generator-function@^1"
+  "is-nan": "npm:@nolyfill/is-nan@^1"
+  "isarray": "npm:@nolyfill/isarray@^1"
+  "side-channel": "npm:@nolyfill/side-channel@^1"
+  "leancloud-storage": "-"
+  "@cloudbase/node-sdk": "-"
+  "deta": "-"
+  "think-model-postgresql": "./packages/placebo"
+  "think-model-mysql": "./packages/placebo"
+  "think-model-mysql2": "./packages/placebo"
+  "think-mongo": "-"
+  "es-set-tostringtag": "npm:@nolyfill/es-set-tostringtag@^1"
+  "safe-buffer": "npm:@nolyfill/safe-buffer@^1"
+  "safer-buffer": "npm:@nolyfill/safer-buffer@^1"
+  "akismet": "./packages/akismet-js"
+  "hasown": "npm:@nolyfill/hasown@^1"
+  "@mathjax/src": "-"
+  "@mathjax/mathjax-tex-font": "-"
+  "@mdit/plugin-mathjax": "-"
+  "think-model-sqlite": "./packages/think-model-node-sqlite"
+  "ip2region": "-"
+  "abab": "npm:@nolyfill/abab@^1"
+patchedDependencies:
+  '@waline/vercel@1.41.3': patches/@waline__vercel.patch

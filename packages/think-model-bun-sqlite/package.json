@@ -11,13 +11,13 @@
   "type": "module",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@types/bun": "^1.3.5",
-    "@types/koa": "^3.0.0",
-    "typescript": "^5.9.3"
+    "@types/bun": "^1.3.14",
+    "@types/koa": "^3.0.3",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "think-debounce": "^1.0.4",
-    "think-helper": "^1.1.4",
+    "think-helper": "^1.1.5",
     "think-instance": "^1.0.2",
     "think-model-abstract": "^1.6.5"
   },

@@ -1,146 +1,189 @@
 diff --git a/src/config/adapter.js b/src/config/adapter.js
-index 39e5dd6fa962bca860dc911f4285ea3403a7f076..9e2b0ed5ab5037d67437ee4d2fd2e98ff31d326b 100644
+index a518f7114f741b1d42ca1f825b801b500a692584..c7efe20f5e4839991dfd42f23c0fb6b86ade6db3 100644
 --- a/src/config/adapter.js
 +++ b/src/config/adapter.js
-@@ -7,7 +7,7 @@ let Sqlite;
+@@ -6,7 +6,7 @@ const Postgresql = require('think-model-postgresql');
+ let Sqlite;
  
  try {
-   // oxlint-disable-next-line node/global-require
 -  Sqlite = require('think-model-sqlite');
 +  Sqlite = require('think-model-sqlite').default;
  } catch (err) {
    // oxlint-disable-next-line typescript/no-extraneous-class
    Sqlite = class {};
 diff --git a/src/config/extend.js b/src/config/extend.js
-index ff91f2e98ed374bc346d2e70277becbd5fd1fa55..faacd1362a65f2926952bd17fe782c6142d6df01 100644
+index 32acd05d8f7feaf01ad5ab462a4c2b42efe753cd..e1504e76cbb6bb40d2a45e8e06c8b6e2f84c2be8 100644
 --- a/src/config/extend.js
 +++ b/src/config/extend.js
 @@ -1,11 +1,9 @@
- const Model = require('think-model');
--const Mongo = require('think-mongo');
+ const model = require('think-model');
+-const mongo = require('think-mongo');
  
  const { isNetlify, netlifyFunctionPrefix } = require('./netlify');
  
  module.exports = [
-   Model(think.app),
--  Mongo(think.app),
+   model(think.app),
+-  mongo(think.app),
    {
      context: {
        get serverURL() {
 diff --git a/src/controller/comment.js b/src/controller/comment.js
-index cb0e3787a9b943319f347cf0109cf59f0c44814a..949335f0209f3a099470aac818aee0de06d06dce 100644
+index 07cc78eb4f529833cd157e355de5fe1d8b1b5c13..4ab08c2d21a14a3a001f26bc827b740ec16602d8 100644
 --- a/src/controller/comment.js
 +++ b/src/controller/comment.js
-@@ -48,10 +48,6 @@ const formatCmt = async (
-     comment.ip = ip;
+@@ -47,11 +47,6 @@ const formatCmt = async (
+     delete comment.mail;
    }
  
 -  // administrator can always show region
 -  if (isAdmin || !think.config('disableRegion')) {
 -    comment.addr = await think.ip2region(ip, { depth: isAdmin ? 3 : 1 });
 -  }
+-
    comment.comment = markdownParser(comment.comment);
    comment.like = Number(comment.like) || 0;
  
 diff --git a/src/extend/think.js b/src/extend/think.js
-index ced2b188a7887d557f43ad27d98dcb8129b13007..f0d6364eea44a6eea309def07f16d759aaf98448 100644
+index 93c323a67f5cb370f2e4552d06fb53edc879630a..6ca25eaa610a0ebeb89d82f91dcc07e6cca8f6e0 100644
 --- a/src/extend/think.js
 +++ b/src/extend/think.js
-@@ -1,4 +1,3 @@
+@@ -1,25 +1,7 @@
 -const IP2Region = require('ip2region').default;
  const parser = require('ua-parser-js');
  
  const preventMessage = 'PREVENT_NEXT_PROCESS';
+ 
+-// Cached IP2Region instance using IIFE closure pattern
+-// Instance is created on first access and reused for all subsequent calls
+-const getIP2RegionInstance = (() => {
+-  let instance = null;
+-
+-  return () => {
+-    if (!instance) {
+-      instance = new IP2Region({
+-        ipv4db: process.env.IP2REGION_DB_V4 || process.env.IP2REGION_DB,
+-        ipv6db: process.env.IP2REGION_DB_V6,
+-      });
+-    }
+-
+-    return instance;
+-  };
+-})();
+-
+ const OS_VERSION_MAP = {
+   Windows: {
+     'NT 11.0': '11',
+@@ -82,25 +64,6 @@ module.exports = {
+       }
+     });
+   },
+-  async ip2region(ip, { depth = 1 }) {
+-    if (!ip) return '';
+-
+-    try {
+-      const res = getIP2RegionInstance().search(ip);
+-
+-      if (!res) {
+-        return '';
+-      }
+-
+-      const { province, city, isp } = res;
+-      const address = [...new Set([province, city, isp].filter(Boolean))];
+-      return address.slice(0, depth).join(' ');
+-    } catch (err) {
+-      console.log(err);
+-
+-      return '';
+-    }
+-  },
+   uaParser(uaText) {
+     const ua = parser(uaText);
+ 
 diff --git a/src/service/akismet.js b/src/service/akismet.js
-index e8c70877174e59d72ce95b5f1c2589c9e9f0db66..86d7869694db491a5e3e4a2dd1aa0f888e7afa64 100644
+index 5858fe8a98198ab77fbc00aa09597d711ba1e8ee..31b765d2e56be5f60a44b8c0d4b747d8bf418037 100644
 --- a/src/service/akismet.js
 +++ b/src/service/akismet.js
-@@ -1,6 +1,6 @@
--const Akismet = require('akismet');
-+const Akismet = require("akismet");
- 
--const DEFAULT_KEY = '70542d86693e';
-+const DEFAULT_KEY = "70542d86693e";
- 
- // oxlint-disable-next-line func-names
- module.exports = function (comment, blog) {
-@@ -10,40 +10,31 @@ module.exports = function (comment, blog) {
-     AKISMET_KEY = DEFAULT_KEY;
+@@ -13,6 +13,7 @@ module.exports = class extends think.Service {
+       this.akismet = Akismet.client({
+         blog: blog || SITE_URL,
+         apiKey: key,
++        port: 443,
+       });
+     }
    }
+@@ -20,37 +21,29 @@ module.exports = class extends think.Service {
+   async check(comment) {
+     const { SITE_URL } = process.env;
  
--  if (AKISMET_KEY.toLowerCase() === 'false') {
-+  if (AKISMET_KEY.toLowerCase() === "false") {
-     return Promise.resolve(false);
-   }
--
--  // oxlint-disable-next-line func-names
--  return new Promise(function (resolve, reject) {
--    const akismet = Akismet.client({ blog, apiKey: AKISMET_KEY });
--
--    // oxlint-disable-next-line func-names
--    akismet.verifyKey(function (err, verifyKey) {
--      if (err) {
--        reject(err);
+-    return new Promise((resolve, reject) => {
+-      if (!this.akismet) {
+-        reject(new Error('Akismet is not configured!'));
 -        return;
--      } else if (!verifyKey) {
--        reject(new Error('Akismet API_KEY verify failed!'));
--        return;
-+  const akismet = Akismet.client({ blog, apiKey: AKISMET_KEY, port: 443 });
-+  return akismet
-+    .verifyKey()
-+    .then(({ err: verifyErr, isValid }) => {
-+      if (verifyErr) {
-+        return Promise.reject(verifyErr);
-+      } else if (!isValid) {
-+        return Promise.reject(new Error("Akismet API_KEY verify failed!"));
-       }
+-      }
 -
--      akismet.checkComment(
--        {
--          user_ip: comment.ip,
--          permalink: SITE_URL + comment.url,
--          comment_author: comment.nick,
--          comment_content: comment.comment,
--        },
--        // oxlint-disable-next-line func-names
--        function (err, spam) {
--          if (err) {
--            reject(err);
--            return;
--          }
--          resolve(spam);
--        },
--      );
-+    })
-+    .then(() =>
-+      akismet.checkComment({
-+        user_ip: comment.ip,
-+        permalink: SITE_URL + comment.url,
-+        comment_author: comment.nick,
-+        comment_content: comment.comment,
-+      }),
-+    )
-+    .then(({ err: checkErr, isSpam }) => {
-+      if (checkErr) {
-+        return Promise.reject(checkErr);
-+      }
-+      return isSpam;
+-      this.akismet.verifyKey((err, verifyKey) => {
+-        if (err) {
+-          reject(err);
+-          return;
+-        } else if (!verifyKey) {
+-          reject(new Error('Akismet API_KEY verify failed!'));
+-          return;
+-        }
+-
+-        this.akismet.checkComment(
+-          {
+-            user_ip: comment.ip,
+-            permalink: SITE_URL + comment.url,
+-            comment_author: comment.nick,
+-            comment_content: comment.comment,
+-          },
+-          (err, spam) => {
+-            if (err) {
+-              reject(err);
+-              return;
+-            }
+-            resolve(spam);
+-          },
+-        );
+-      });
++    if (!this.akismet) {
++      return Promise.reject(new Error('Akismet is not configured!'));
++    }
++
++    const { err: verifyErr, isValid } = await this.akismet.verifyKey();
++
++    if (verifyErr) {
++      return Promise.reject(verifyErr);
++    } else if (!isValid) {
++      return Promise.reject(new Error('Akismet API_KEY verify failed!'));
++    }
++
++    const { err: checkErr, isSpam } = await this.akismet.checkComment({
++      user_ip: comment.ip,
++      permalink: SITE_URL + comment.url,
++      comment_author: comment.nick,
++      comment_content: comment.comment,
      });
--  });
++
++    if (checkErr) {
++      return Promise.reject(checkErr);
++    }
++
++    return isSpam;
+   }
  };
 diff --git a/src/service/markdown/index.js b/src/service/markdown/index.js
-index 4cc808b7ad03089c4a213af5a918cf0811a5431b..e6a8273399721e1be61a07b763fff6463e772e5f 100644
+index 26f4cedbc7d18ec8aaf13604bd05447becc6e1a5..cce8cb78c6bcd2a9236f4c1f18fe0c32bc3bb001 100644
 --- a/src/service/markdown/index.js
 +++ b/src/service/markdown/index.js
-@@ -5,7 +5,6 @@ const MarkdownIt = require('markdown-it');
+@@ -1,6 +1,5 @@
+ const { katex: katexPlugin } = require('@mdit/plugin-katex');
+ const { sub: subPlugin } = require('@mdit/plugin-sub');
+-const { createMathjaxInstance, mathjax: mathjaxPlugin } = require('@mdit/plugin-mathjax/sync');
+ const { sup: supPlugin } = require('@mdit/plugin-sup');
+ const MarkdownIt = require('markdown-it');
  const emojiPlugin = require('markdown-it-emoji');
- 
- const { resolveHighlighter } = require('./highlight.js');
--const { mathjaxPlugin } = require('./mathjax.js');
- const { sanitize } = require('./xss.js');
- 
- const getMarkdownParser = () => {
-@@ -31,7 +30,7 @@ const getMarkdownParser = () => {
+@@ -30,7 +29,7 @@ const getMarkdownParser = (markdown = {}) => {
      html: true,
    });
  
@@ -149,30 +192,28 @@ index 4cc808b7ad03089c4a213af5a918cf0811a5431b..e6a8273399721e1be61a07b763fff646
  
    // parse emoji
    if (emoji !== false) {
-@@ -55,7 +54,7 @@ const getMarkdownParser = () => {
+@@ -54,8 +53,7 @@ const getMarkdownParser = (markdown = {}) => {
        output: 'mathml',
      });
    } else if (tex !== false) {
--    markdownIt.use(mathjaxPlugin, mathjax);
+-    const mathjaxInstance = createMathjaxInstance({ output: 'svg', mathjax });
+-    markdownIt.use(mathjaxPlugin, mathjaxInstance);
 +    throw new Error(`tex plugin "${tex}" is not supported`);
    }
  
    return (content) => sanitize(markdownIt.render(content));
-diff --git a/src/service/markdown/mathjax.js b/src/service/markdown/mathjax.js
-deleted file mode 100644
-index c5377d729603d06213bb07f42eadc9bebe5e5d03..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/cloudbase.js b/src/service/storage/cloudbase.js
 deleted file mode 100644
-index 2a4e1496a86ad6ffa9c8c772886159e734862e9a..0000000000000000000000000000000000000000
+index ebd320cc4b1bdaf845ddb84ac06b74577ce6489e..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/leancloud.js b/src/service/storage/leancloud.js
 deleted file mode 100644
-index 57c27bb2ae943bffeed1d85162ea1778acc77053..0000000000000000000000000000000000000000
+index 411037e0608fb3873bc307bebf1a249063119313..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/mongodb.js b/src/service/storage/mongodb.js
 deleted file mode 100644
-index b71c373dc19deb85abde0fb87a5a0db60aac6c1f..0000000000000000000000000000000000000000
+index 2aafba798e06917fc53a98278ef347d124601e25..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/postgresql.js b/src/service/storage/postgresql.js
 deleted file mode 100644
-index 754c7b039ebc36da4130e985940749afe4e7b4ca..0000000000000000000000000000000000000000
+index ecc947b3bf08d3d3001f3a3bb22e6b04687597c6..0000000000000000000000000000000000000000
 diff --git a/src/service/storage/tidb.js b/src/service/storage/tidb.js
 deleted file mode 100644
 index 24444ae8e21cc063f22c97360901272431635fe6..0000000000000000000000000000000000000000
