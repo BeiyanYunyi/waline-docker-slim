@@ -1,5 +1,5 @@
 diff --git a/src/config/adapter.js b/src/config/adapter.js
-index a518f7114f741b1d42ca1f825b801b500a692584..c7efe20f5e4839991dfd42f23c0fb6b86ade6db3 100644
+index f57c1ec..d6e6eef 100644
 --- a/src/config/adapter.js
 +++ b/src/config/adapter.js
 @@ -6,7 +6,7 @@ const Postgresql = require('think-model-postgresql');
@@ -12,7 +12,7 @@ index a518f7114f741b1d42ca1f825b801b500a692584..c7efe20f5e4839991dfd42f23c0fb6b8
    // oxlint-disable-next-line typescript/no-extraneous-class
    Sqlite = class {};
 diff --git a/src/config/extend.js b/src/config/extend.js
-index 32acd05d8f7feaf01ad5ab462a4c2b42efe753cd..e1504e76cbb6bb40d2a45e8e06c8b6e2f84c2be8 100644
+index 32acd05..e1504e7 100644
 --- a/src/config/extend.js
 +++ b/src/config/extend.js
 @@ -1,11 +1,9 @@
@@ -27,27 +27,11 @@ index 32acd05d8f7feaf01ad5ab462a4c2b42efe753cd..e1504e76cbb6bb40d2a45e8e06c8b6e2
    {
      context: {
        get serverURL() {
-diff --git a/src/controller/comment.js b/src/controller/comment.js
-index 07cc78eb4f529833cd157e355de5fe1d8b1b5c13..4ab08c2d21a14a3a001f26bc827b740ec16602d8 100644
---- a/src/controller/comment.js
-+++ b/src/controller/comment.js
-@@ -47,11 +47,6 @@ const formatCmt = async (
-     delete comment.mail;
-   }
- 
--  // administrator can always show region
--  if (isAdmin || !think.config('disableRegion')) {
--    comment.addr = await think.ip2region(ip, { depth: isAdmin ? 3 : 1 });
--  }
--
-   comment.comment = markdownParser(comment.comment);
-   comment.like = Number(comment.like) || 0;
- 
 diff --git a/src/extend/think.js b/src/extend/think.js
-index 93c323a67f5cb370f2e4552d06fb53edc879630a..6ca25eaa610a0ebeb89d82f91dcc07e6cca8f6e0 100644
+index a026a1b..1d1da89 100644
 --- a/src/extend/think.js
 +++ b/src/extend/think.js
-@@ -1,25 +1,7 @@
+@@ -1,26 +1,7 @@
 -const IP2Region = require('ip2region').default;
  const parser = require('ua-parser-js');
  
@@ -58,6 +42,7 @@ index 93c323a67f5cb370f2e4552d06fb53edc879630a..6ca25eaa610a0ebeb89d82f91dcc07e6
 -const getIP2RegionInstance = (() => {
 -  let instance = null;
 -
+-  // oxlint-disable-next-line react/function-component-definition
 -  return () => {
 -    if (!instance) {
 -      instance = new IP2Region({
@@ -73,7 +58,7 @@ index 93c323a67f5cb370f2e4552d06fb53edc879630a..6ca25eaa610a0ebeb89d82f91dcc07e6
  const OS_VERSION_MAP = {
    Windows: {
      'NT 11.0': '11',
-@@ -82,25 +64,6 @@ module.exports = {
+@@ -83,25 +64,6 @@ module.exports = {
        }
      });
    },
@@ -100,7 +85,7 @@ index 93c323a67f5cb370f2e4552d06fb53edc879630a..6ca25eaa610a0ebeb89d82f91dcc07e6
      const ua = parser(uaText);
  
 diff --git a/src/service/akismet.js b/src/service/akismet.js
-index 5858fe8a98198ab77fbc00aa09597d711ba1e8ee..31b765d2e56be5f60a44b8c0d4b747d8bf418037 100644
+index 5858fe8..31b765d 100644
 --- a/src/service/akismet.js
 +++ b/src/service/akismet.js
 @@ -13,6 +13,7 @@ module.exports = class extends think.Service {
@@ -172,30 +157,37 @@ index 5858fe8a98198ab77fbc00aa09597d711ba1e8ee..31b765d2e56be5f60a44b8c0d4b747d8
 +    return isSpam;
    }
  };
+diff --git a/src/service/core.js b/src/service/core.js
+index 45cb673..0877412 100644
+--- a/src/service/core.js
++++ b/src/service/core.js
+@@ -72,7 +72,6 @@ module.exports = class extends think.Service {
+               link: value.link ?? value.url,
+             }),
+         },
+-        region: { lookup: (ip, depth) => think.ip2region(ip, { depth }) },
+         userAgent: { parse: (value) => parser(value) },
+         captcha: {
+           verify: async (input, ctx) => {
 diff --git a/src/service/markdown/index.js b/src/service/markdown/index.js
-index 26f4cedbc7d18ec8aaf13604bd05447becc6e1a5..cce8cb78c6bcd2a9236f4c1f18fe0c32bc3bb001 100644
+index 9f5d19e..c168611 100644
 --- a/src/service/markdown/index.js
 +++ b/src/service/markdown/index.js
-@@ -1,6 +1,5 @@
- const { katex: katexPlugin } = require('@mdit/plugin-katex');
- const { sub: subPlugin } = require('@mdit/plugin-sub');
--const { createMathjaxInstance, mathjax: mathjaxPlugin } = require('@mdit/plugin-mathjax/sync');
- const { sup: supPlugin } = require('@mdit/plugin-sup');
- const MarkdownIt = require('markdown-it');
- const emojiPlugin = require('markdown-it-emoji');
-@@ -30,7 +29,7 @@ const getMarkdownParser = (markdown = {}) => {
+@@ -26,7 +26,7 @@ const getMarkdownParser = async (markdown = {}) => {
      html: true,
    });
  
--  const { emoji, tex, mathjax, katex, sub, sup } = plugin;
-+  const { emoji, tex, katex, sub, sup } = plugin;
+-  const { emoji, tex, mathjax, katex, sub, sup, spoiler } = plugin;
++  const { emoji, tex, katex, sub, sup, spoiler } = plugin;
  
    // parse emoji
    if (emoji !== false) {
-@@ -54,8 +53,7 @@ const getMarkdownParser = (markdown = {}) => {
+@@ -59,10 +59,7 @@ const getMarkdownParser = async (markdown = {}) => {
        output: 'mathml',
      });
    } else if (tex !== false) {
+-    const { createMathjaxInstance, mathjax: mathjaxPlugin } =
+-      await import('@mdit/plugin-mathjax/sync');
 -    const mathjaxInstance = createMathjaxInstance({ output: 'svg', mathjax });
 -    markdownIt.use(mathjaxPlugin, mathjaxInstance);
 +    throw new Error(`tex plugin "${tex}" is not supported`);
@@ -204,16 +196,16 @@ index 26f4cedbc7d18ec8aaf13604bd05447becc6e1a5..cce8cb78c6bcd2a9236f4c1f18fe0c32
    return (content) => sanitize(markdownIt.render(content));
 diff --git a/src/service/storage/cloudbase.js b/src/service/storage/cloudbase.js
 deleted file mode 100644
-index ebd320cc4b1bdaf845ddb84ac06b74577ce6489e..0000000000000000000000000000000000000000
+index 45da831..0000000
 diff --git a/src/service/storage/leancloud.js b/src/service/storage/leancloud.js
 deleted file mode 100644
-index 411037e0608fb3873bc307bebf1a249063119313..0000000000000000000000000000000000000000
+index 9270098..0000000
 diff --git a/src/service/storage/mongodb.js b/src/service/storage/mongodb.js
 deleted file mode 100644
-index 2aafba798e06917fc53a98278ef347d124601e25..0000000000000000000000000000000000000000
+index 39902c4..0000000
 diff --git a/src/service/storage/postgresql.js b/src/service/storage/postgresql.js
 deleted file mode 100644
-index ecc947b3bf08d3d3001f3a3bb22e6b04687597c6..0000000000000000000000000000000000000000
+index 5af78b8..0000000
 diff --git a/src/service/storage/tidb.js b/src/service/storage/tidb.js
 deleted file mode 100644
-index 24444ae8e21cc063f22c97360901272431635fe6..0000000000000000000000000000000000000000
+index 24444ae..0000000

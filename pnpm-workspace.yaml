@@ -27,4 +27,4 @@ overrides:
   "ip2region": "-"
   "abab": "npm:@nolyfill/abab@^1"
 patchedDependencies:
-  '@waline/vercel@1.41.3': patches/@waline__vercel.patch
+  "@waline/vercel@1.43.4": patches/@waline__vercel.patch
