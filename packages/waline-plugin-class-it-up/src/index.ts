@@ -1,4 +1,6 @@
 import { createHash } from 'node:crypto';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { createHistoryStore } from './history.ts';
 
 interface ICommentRecord {
   lastReportTime: Date;
@@ -18,7 +20,7 @@ interface IComment {
   status: 'approved' | 'waiting' | 'spam';
 }
 
-const hashIpAndUA = (ip: string, ua: string): string => {
+const hashIpAndUA = (_ip: string, ua: string): string => {
   const sha256 = createHash('sha256');
   // sha256.update(ip);
   sha256.update(ua);
@@ -26,6 +28,46 @@ const hashIpAndUA = (ip: string, ua: string): string => {
 };
 
 const bannedUserMap: Map<string, ICommentRecord> = new Map();
+const banPath = './data/class-it-up-bans.json';
+let bansLoaded: Promise<void> | undefined;
+let banWrite: Promise<unknown> = Promise.resolve();
+
+const loadBans = (): Promise<void> => {
+  bansLoaded ??= (async () => {
+    let raw: string;
+    try {
+      raw = await readFile(banPath, 'utf8');
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') return;
+      throw error;
+    }
+    const records: unknown = JSON.parse(raw);
+    if (!records || typeof records !== 'object' || Array.isArray(records)) {
+      throw new Error('Invalid Class It Up bans');
+    }
+    const loaded = new Map<string, ICommentRecord>();
+    for (const [hash, record] of Object.entries(records)) {
+      if (
+        !record ||
+        typeof record.lastReportTime !== 'string' ||
+        !Number.isFinite(Date.parse(record.lastReportTime)) ||
+        !Number.isSafeInteger(record.banTimeMultiplier) ||
+        record.banTimeMultiplier < 1
+      ) {
+        throw new Error('Invalid Class It Up ban record');
+      }
+      loaded.set(hash, {
+        lastReportTime: new Date(record.lastReportTime),
+        banTimeMultiplier: record.banTimeMultiplier,
+      });
+    }
+    for (const [hash, record] of loaded) bannedUserMap.set(hash, record);
+  })().catch((error) => {
+    bansLoaded = undefined;
+    throw error;
+  });
+  return bansLoaded;
+};
 
 const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
   const getBanUntil = (record: ICommentRecord): Date =>
@@ -33,7 +75,8 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
       record.lastReportTime.getTime() + 60_000 * record.banTimeMultiplier,
     );
 
-  const checkBanned = (comment: IComment): void => {
+  const checkBanned = async (comment: IComment): Promise<void> => {
+    await loadBans();
     const userHash = hashIpAndUA(comment.ip, comment.ua);
     const record = map.get(userHash);
     if (!record) return;
@@ -47,20 +90,34 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
     }
   };
 
-  const recordViolation = (comment: IComment): void => {
+  const recordViolation = async (comment: IComment): Promise<void> => {
     const userHash = hashIpAndUA(comment.ip, comment.ua);
     const now = new Date();
     const record = map.get(userHash);
     if (record) {
       record.lastReportTime = now;
-      record.banTimeMultiplier *= 2;
-      return;
+      record.banTimeMultiplier = Math.min(
+        record.banTimeMultiplier * 2,
+        // Keep the resulting ban expiry within JavaScript's Date range.
+        Math.floor((8_640_000_000_000_000 - now.getTime()) / 60_000),
+      );
+    } else {
+      map.set(userHash, {
+        lastReportTime: now,
+        banTimeMultiplier: 1,
+      });
     }
-
-    map.set(userHash, {
-      lastReportTime: now,
-      banTimeMultiplier: 1,
+    const operation = banWrite.then(async () => {
+      await mkdir('./data', { recursive: true });
+      await writeFile(
+        `${banPath}.tmp`,
+        JSON.stringify(Object.fromEntries(map)),
+        'utf8',
+      );
+      await rename(`${banPath}.tmp`, banPath);
     });
+    banWrite = operation.catch(() => {});
+    await operation;
   };
 
   return { checkBanned, recordViolation };
@@ -69,21 +126,26 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
 const ipUaFilter = createIpUaFilter(bannedUserMap);
 
 const apiAddress = process.env.CLASS_IT_UP_API;
+const recordRequest = createHistoryStore('./data');
 
 const preSave = async (comment: IComment): Promise<void> => {
   if (!apiAddress) return;
 
-  ipUaFilter.checkBanned(comment);
+  await ipUaFilter.checkBanned(comment);
 
+  const content = await recordRequest(
+    hashIpAndUA(comment.ip, comment.ua),
+    comment.comment,
+  );
   const res: { predicted_label: 0 | 1 } = await fetch(apiAddress, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content: comment.comment }),
+    body: JSON.stringify({ content }),
   }).then((res) => res.json());
   if (res.predicted_label === 1) {
     think.logger.warn('Stalking detected');
     comment.status = 'waiting';
-    ipUaFilter.recordViolation(comment);
+    await ipUaFilter.recordViolation(comment);
     throw new Error(
       'Stalking-like comment detected, please rearrange your comment.',
     );
