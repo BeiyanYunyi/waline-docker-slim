@@ -14,8 +14,11 @@ directory (the existing Docker volume mounts this as `/app/data`):
   `{ "content": "...", "timestamp": 1792454400000 }`; timestamps are Unix
   milliseconds.
 - `class-it-up-requests.ldjson`: one JSON object per request with `content`
-  (the exact combined API content), `uaHash`, and `requestedAt` (UTC ISO time,
-  recorded immediately before dispatch). Embedded newlines are JSON-escaped.
+  (the exact combined API content), `uaHash`, `requestedAt` (UTC ISO time,
+  captured immediately before dispatch), and `predictedLabel` (the API's
+  `predicted_label`, or `null` if no prediction is received). The entry is
+  appended after the request completes or fails. Embedded newlines are
+  JSON-escaped.
 - `class-it-up-bans.json`: UA hashes mapped to `lastReportTime` (UTC ISO time)
   and `banTimeMultiplier`. The initial ban is one minute; subsequent violations
   double it. Expired records remain so that escalation survives restarts.
@@ -28,7 +31,6 @@ An unset `CLASS_IT_UP_API` disables the hook and its persistence.
 
 History updates and log appends are serialized within the server process;
 JSON is replaced through a temporary file. Run only one server process per data
-directory. Corrupt history and storage errors stop classification rather than
-silently discard history or send unlogged requests. The log records attempted
-requests, not confirmed API receipt, and grows independently of the sliding
-window; rotate it as needed.
+directory. Corrupt history and storage errors propagate to the hook caller.
+Requests interrupted by process termination before the log append may not be
+recorded. The log grows independently of the sliding window; rotate it as needed.

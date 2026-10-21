@@ -16,15 +16,25 @@ interface Message {
 
 type History = Record<string, Message[]>;
 
+interface RequestLog {
+  content: string;
+  uaHash: string;
+  requestedAt: string;
+  predictedLabel: 0 | 1 | null;
+}
+
+interface HistoryStore {
+  recordMessage(uaHash: string, content: string): Promise<string>;
+  recordRequest(request: RequestLog): Promise<void>;
+}
+
 // One instance per process: serialize read/modify/write across all UA hashes.
-export const createHistoryStore = (
-  directory: string,
-): ((uaHash: string, content: string) => Promise<string>) => {
+export const createHistoryStore = (directory: string): HistoryStore => {
   let pending: Promise<unknown> = Promise.resolve();
   const historyPath = join(directory, 'class-it-up-history.json');
   const logPath = join(directory, 'class-it-up-requests.ldjson');
 
-  return (uaHash, content) => {
+  const recordMessage = (uaHash: string, content: string): Promise<string> => {
     const operation = pending.then(async () => {
       await mkdir(directory, { recursive: true });
       let history: History = Object.create(null);
@@ -69,19 +79,20 @@ export const createHistoryStore = (
       const temporaryPath = `${historyPath}.tmp`;
       await writeFile(temporaryPath, JSON.stringify(history), 'utf8');
       await rename(temporaryPath, historyPath);
-      await appendFile(
-        logPath,
-        `${JSON.stringify({
-          content: combined,
-          uaHash,
-          requestedAt: new Date().toISOString(),
-        })}\n`,
-        'utf8',
-      );
       return combined;
     });
     // A failed write must not permanently poison the queue.
     pending = operation.catch(() => {});
     return operation;
   };
+
+  const recordRequest = (request: RequestLog): Promise<void> => {
+    const operation = pending.then(() =>
+      appendFile(logPath, `${JSON.stringify(request)}\n`, 'utf8'),
+    );
+    pending = operation.catch(() => {});
+    return operation;
+  };
+
+  return { recordMessage, recordRequest };
 };

@@ -126,23 +126,28 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
 const ipUaFilter = createIpUaFilter(bannedUserMap);
 
 const apiAddress = process.env.CLASS_IT_UP_API;
-const recordRequest = createHistoryStore('./data');
+const { recordMessage, recordRequest } = createHistoryStore('./data');
 
 const preSave = async (comment: IComment): Promise<void> => {
   if (!apiAddress) return;
 
   await ipUaFilter.checkBanned(comment);
 
-  const content = await recordRequest(
-    hashIpAndUA(comment.ip, comment.ua),
-    comment.comment,
-  );
-  const res: { predicted_label: 0 | 1 } = await fetch(apiAddress, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ content }),
-  }).then((res) => res.json());
-  if (res.predicted_label === 1) {
+  const uaHash = hashIpAndUA(comment.ip, comment.ua);
+  const content = await recordMessage(uaHash, comment.comment);
+  const requestedAt = new Date().toISOString();
+  let predictedLabel: 0 | 1 | null = null;
+  try {
+    const res: { predicted_label: 0 | 1 } = await fetch(apiAddress, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    }).then((res) => res.json());
+    predictedLabel = res.predicted_label ?? null;
+  } finally {
+    await recordRequest({ content, uaHash, requestedAt, predictedLabel });
+  }
+  if (predictedLabel === 1) {
     think.logger.warn('Stalking detected');
     comment.status = 'waiting';
     await ipUaFilter.recordViolation(comment);
