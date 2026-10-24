@@ -21,11 +21,17 @@ directory (the existing Docker volume mounts this as `/app/data`):
   JSON-escaped.
 - `class-it-up-bans.json`: UA hashes mapped to `lastReportTime` (UTC ISO time)
   and `banTimeMultiplier`. The initial ban is one minute; subsequent violations
-  double it. Expired records remain so that escalation survives restarts.
+  double it up to a maximum of 1024 minutes. Loaded records above this limit
+  are capped at 1024 minutes as well. Expired records remain so that escalation
+  survives restarts.
 
-History survives restarts and retains messages even if classification rejects
-them or the API request fails. Requests rejected by the existing temporary-ban
-check do not enter history or call the API. Temporary bans are restored on the
+Comments submitted during a temporary ban or classified with `predictedLabel === 1`
+are allowed to submit with status `waiting`, without a moderation error.
+Comments submitted during a temporary ban do not enter history or call the API,
+and do not extend or escalate the ban.
+
+History survives restarts and retains messages even if classification marks
+them as waiting or the API request fails. Temporary bans are restored on the
 first enabled hook invocation and saved whenever a violation is recorded.
 An unset `CLASS_IT_UP_API` disables the hook and its persistence.
 

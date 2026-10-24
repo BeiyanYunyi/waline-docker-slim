@@ -29,6 +29,7 @@ const hashIpAndUA = (_ip: string, ua: string): string => {
 
 const bannedUserMap: Map<string, ICommentRecord> = new Map();
 const banPath = './data/class-it-up-bans.json';
+const maxBanMinutes = 1024;
 let bansLoaded: Promise<void> | undefined;
 let banWrite: Promise<unknown> = Promise.resolve();
 
@@ -58,7 +59,7 @@ const loadBans = (): Promise<void> => {
       }
       loaded.set(hash, {
         lastReportTime: new Date(record.lastReportTime),
-        banTimeMultiplier: record.banTimeMultiplier,
+        banTimeMultiplier: Math.min(record.banTimeMultiplier, maxBanMinutes),
       });
     }
     for (const [hash, record] of loaded) bannedUserMap.set(hash, record);
@@ -75,19 +76,18 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
       record.lastReportTime.getTime() + 60_000 * record.banTimeMultiplier,
     );
 
-  const checkBanned = async (comment: IComment): Promise<void> => {
+  const checkBanned = async (comment: IComment): Promise<boolean> => {
     await loadBans();
     const userHash = hashIpAndUA(comment.ip, comment.ua);
     const record = map.get(userHash);
-    if (!record) return;
+    if (!record) return false;
 
     const now = new Date();
     if (now < getBanUntil(record)) {
       comment.status = 'waiting';
-      throw new Error(
-        `You are temporarily banned for ${Math.ceil((getBanUntil(record).getTime() - now.getTime()) / 60000)} minutes, please try again later.`,
-      );
+      return true;
     }
+    return false;
   };
 
   const recordViolation = async (comment: IComment): Promise<void> => {
@@ -98,8 +98,7 @@ const createIpUaFilter = (map: Map<string, ICommentRecord>) => {
       record.lastReportTime = now;
       record.banTimeMultiplier = Math.min(
         record.banTimeMultiplier * 2,
-        // Keep the resulting ban expiry within JavaScript's Date range.
-        Math.floor((8_640_000_000_000_000 - now.getTime()) / 60_000),
+        maxBanMinutes,
       );
     } else {
       map.set(userHash, {
@@ -131,7 +130,7 @@ const { recordMessage, recordRequest } = createHistoryStore('./data');
 const preSave = async (comment: IComment): Promise<void> => {
   if (!apiAddress) return;
 
-  await ipUaFilter.checkBanned(comment);
+  if (await ipUaFilter.checkBanned(comment)) return;
 
   const uaHash = hashIpAndUA(comment.ip, comment.ua);
   const content = await recordMessage(uaHash, comment.comment);
@@ -151,9 +150,6 @@ const preSave = async (comment: IComment): Promise<void> => {
     think.logger.warn('Stalking detected');
     comment.status = 'waiting';
     await ipUaFilter.recordViolation(comment);
-    throw new Error(
-      'Stalking-like comment detected, please rearrange your comment.',
-    );
   }
 };
 
