@@ -188,7 +188,7 @@ overrides:
   abab: npm:@nolyfill/abab@^1
 
 patchedDependencies:
-  '@waline/vercel@1.43.4': 8ee92015813257933c177ce6b9cb89fc448c00907c03450486f9b1f3f469a1f0
+  '@waline/vercel@1.43.6': bc0f48c0ca3b0eacd0ed577f235ac822144d6a10d62f516d3083736ab57c7413
 
 importers:
 
@@ -198,8 +198,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       '@waline/vercel':
-        specifier: ^1.43.4
-        version: 1.43.4(patch_hash=8ee92015813257933c177ce6b9cb89fc448c00907c03450486f9b1f3f469a1f0)(supports-color@7.2.0)
+        specifier: ^1.43.6
+        version: 1.43.6(patch_hash=bc0f48c0ca3b0eacd0ed577f235ac822144d6a10d62f516d3083736ab57c7413)(supports-color@7.2.0)
       thinkjs:
         specifier: 4.0.0
         version: 4.0.0(supports-color@7.2.0)
@@ -222,9 +222,6 @@ importers:
       '@vitest/coverage-v8':
         specifier: 4.1.10
         version: 4.1.10(vitest@4.1.10)
-      dotenv:
-        specifier: 17.4.2
-        version: 17.4.2
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -241,7 +238,7 @@ importers:
         version: 1.0.4
       think-helper:
         specifier: ^1.1.5
-        version: 1.1.5
+        version: 1.3.0
       think-instance:
         specifier: ^1.0.2
         version: 1.0.2
@@ -266,7 +263,7 @@ importers:
         version: 1.0.4
       think-helper:
         specifier: ^1.1.5
-        version: 1.1.5
+        version: 1.3.0
       think-instance:
         specifier: ^1.0.2
         version: 1.0.2
@@ -605,11 +602,11 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@fast-csv/format@5.0.7':
-    resolution: {integrity: sha512-VdypoRxv7PF+LsyPouTMKdB0d76hync+gLpgdNqfqVK44MsgW4oiCJSdrki2FisWT7v2QGUYDHjp4L7w5oO6gw==}
+  '@fast-csv/format@5.0.8':
+    resolution: {integrity: sha512-ipZW+PF3T/28gpHMkgy1j24aQO3ZHCai5LzxotrECw7csd0+6GAA24q7zS6fqeQMzHsCNDyzAE1AdXodqn5Gzw==}
 
-  '@fast-csv/parse@5.0.7':
-    resolution: {integrity: sha512-MeuDeQj0DVmIGWky8STaKtvj232Gpq8kjrOGplHJ99Os7OO5CetVfXvUGqX/3GHYFOUsz6FK8isWtDY2XTFNWw==}
+  '@fast-csv/parse@5.0.8':
+    resolution: {integrity: sha512-i2R1TWa2tgRn9YEsNplzdCv0z8J1O85nUIqPdAQtQOheZ+Pw/3AhekI27Yp095r7qSJK0l8KwphK8WzB3aCtog==}
 
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
@@ -625,74 +622,74 @@ packages:
     resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
     engines: {node: '>= 14.0.0'}
 
-  '@mdit/helper@1.1.2':
-    resolution: {integrity: sha512-xZywQ7aXrmkRCuGvFXguXVKeiQ7kHCxPkjtR+nK/n31YiSPPi/Rmb/ll+CYt0LdyeXR0Y1I16da7gxDT4/VXWg==}
+  '@mdit/helper@1.2.0':
+    resolution: {integrity: sha512-+Lh3nitlVclyxjD0LnOKPCyogVqL1W416FKOYjJSGDVlVKq9/jasQNOsUbjAvRwc+imgnFq1lsnat4q69UibIg==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-emoji@1.2.2':
-    resolution: {integrity: sha512-U+ASgI5ZxDrCtVjLb2FyI2RGlamstOH9rAYB8HgezU4jKNGdtIUW4Re1wL5NrKzPPvSN6i6OdNzT+srSIG3e8g==}
+  '@mdit/plugin-emoji@1.2.3':
+    resolution: {integrity: sha512-b4CpOa2k7Z17I05zILyoP2s090wZosehw+x5oLM1oYqj/Xn1W25wYhY03a+7cRbtuqD7+WngCClrNaIXnye+iQ==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-inline-rule@2.2.2':
-    resolution: {integrity: sha512-FQFiXeWjZCgolJ/3OPZfL7ycsWtEQIUoEXzin+j+rDgeer7lMp3ixBhYF7ye50zkKDIZi+wR/VMJ8dXlUQaXSQ==}
+  '@mdit/plugin-inline-rule@2.2.3':
+    resolution: {integrity: sha512-HO+8vOFe/ZqNg7pFEQRMSdJPMOrNwheEeToCQ80aYLZ/gxlmMtB2cfrx6dQHfUS3TtLZRtuQ9RuLu54AiOURkA==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-katex@1.1.3':
-    resolution: {integrity: sha512-Y6A+X/tMhzHYr01N1IYGKV5zOTXCYUtbAVTOdkDID3NEW1W3hcCJKuFMcuE9SgDc/8CLUCuZwfhJpvhhaulqmw==}
+  '@mdit/plugin-katex@1.1.4':
+    resolution: {integrity: sha512-l3W88fhr+6khSakHCZx64dUzWD7opmMOJDTDKIKrIp/Q4WslC72GDgzKBe0jrX45//z57tl0JaN1I7TnejkQew==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-spoiler@2.1.2':
-    resolution: {integrity: sha512-HE/+35N+m+uzCe2c9L7D3R/NGDk8UxbobgJaKOj8hC4vtPGCEDY5Kmhml+xuXcI1vkh/bMI8dPVfbL5r7lUKew==}
+  '@mdit/plugin-spoiler@2.1.3':
+    resolution: {integrity: sha512-y6QLItjo6buONEgO2Bz2LfgSkXXZ73PX/UJUkMBO7f6KiAX8WsxV1yFbLuRrJvGt9cfbO5VxwIPBZ1xzLdNPJQ==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-sub@1.1.2':
-    resolution: {integrity: sha512-2aN/VzTRL7tSzJ2PO4PHRe0ODDJFHRo3uYAvOv9onZeUtAq7PeN2ySRXhc6tmg4HHdO8xjHQiwa7llZ7bqVNzQ==}
+  '@mdit/plugin-sub@1.1.3':
+    resolution: {integrity: sha512-0XFWxZpJ8PXLnjTn77Tlm2ApIr+rx5hi9gG2Mgi1iz6GgJRsfKtffqqiFd4PYX8iX1ZLWm4MMk4MdA0pByG3Uw==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-sup@1.1.2':
-    resolution: {integrity: sha512-GMqWN5s783jjTSEmd06Ep3IRlY6F4umAp4hvNe7L95XD2Uy1BZrHiC94Dcd6BmGSQjEEO44hw4CMPIC3xrd9sg==}
+  '@mdit/plugin-sup@1.1.3':
+    resolution: {integrity: sha512-h7oEs5u4vCx7A+Xl0esIAbsB67gIWX2fXBGQaiCzWzo7hgclnQgZ/LPkESXlzs2iPBcopZwLWRNJLv2z6WfiEQ==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-tex@1.1.2':
-    resolution: {integrity: sha512-J6boAvyxJzzu87+3mR81YpEqeVBylbA1UKy90lJYSrUPK2jxiN78eC50amP2KhGq83LixcpCFLElATYYW14clw==}
+  '@mdit/plugin-tex@1.1.3':
+    resolution: {integrity: sha512-AidFpoF+hs4ghyoBIhQ7LDJeNYQUgLBga9wmxB+SwbA1F3zeI7S+mfHdv591iLwBdDIn3aLIAN6PjuOgEPYzYg==}
     engines: {node: '>=22'}
     peerDependencies:
-      markdown-it: ^15.0.2
+      markdown-it: ^15.0.3
     peerDependenciesMeta:
       markdown-it:
         optional: true
@@ -1179,9 +1176,9 @@ packages:
   '@waline-plugins/privacy@1.0.0':
     resolution: {integrity: sha512-rgTsHHKD5gv0m2WCDBAtKTZARIXgQb87pxEDpTaEN1zYUeWaSGEha3EJCeD8rgPJO7aWcgKLZ3L7TCvw0P1b5A==}
 
-  '@waline/vercel@1.43.4':
-    resolution: {integrity: sha512-g6qblq8i5H0ByDbsYRdPcsvauXicXfiLYhxIynwHpuYuawM1QuxAGkttQQgCOi+u960JFjbsQOmRzA0XHJfydw==}
-    engines: {node: ^20.19.0 || ^22.12.0 || ^24.0.0}
+  '@waline/vercel@1.43.6':
+    resolution: {integrity: sha512-9HlzJpM9OnXqQRo9Ps866c1FDDipAOVB+uQHDv06gbmRwHylt6xeAuSQ2L7XchrK0Pr2gforcCU8Rf1/DBCfyA==}
+    engines: {node: ^26.0.0}
     bundledDependencies:
       - '@waline/core'
 
@@ -1347,12 +1344,8 @@ packages:
   detect-europe-js@0.1.2:
     resolution: {integrity: sha512-lgdERlL3u0aUdHocoouzT10d9I89VVhk0qNRmll7mXdGfJT1/wqZ2ZLA4oJAjeACPY5fT1wsbq2AT+GkuInsow==}
 
-  dompurify@3.4.16:
-    resolution: {integrity: sha512-sqo+pNp3qRhCIpbgRi1y8Tgk27Bo2Ry7w0dC1NBeNTdZChWjz9Xb/KOoZbRP/R6pQZ80Qw8YhXw13hWWBbMRnQ==}
-
-  dotenv@17.4.2:
-    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
-    engines: {node: '>=12'}
+  dompurify@3.4.17:
+    resolution: {integrity: sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==}
 
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
@@ -1386,9 +1379,9 @@ packages:
     resolution: {integrity: sha512-KfYbmpRm0VbLjEvVa9yGwCi9GI34xvi7A/HXYWQO65CSD2u3MczUJSuwXKFIxlGsgBQizV9q5J9NHj4VG0n+pA==}
     engines: {node: '>=12.0.0'}
 
-  fast-csv@5.0.7:
-    resolution: {integrity: sha512-KirK9wYIUXF/xTYmg/jv9ehUWbQ4Faf6XutuJKlEz72eoqKMMLdCnz+rGDeBSjpV2wwkHQnLSuJ5i+FRRnzZwA==}
-    engines: {node: '>=10.0.0'}
+  fast-csv@5.0.8:
+    resolution: {integrity: sha512-t4rZ2aIpthLq8gnwY9N28CdWZcH0KUDBNL2R5BcdDUdks0uCD8dSHT3IMQq1LAwucASGfQ36TR3P5AZ7AWsCDQ==}
+    engines: {node: '>=20.0.0'}
 
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
@@ -1510,8 +1503,8 @@ packages:
   jws@4.0.1:
     resolution: {integrity: sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==}
 
-  katex@0.18.10:
-    resolution: {integrity: sha512-/B6p9eY9DX7aHBfpkHdpirDTZ5QH9xTwL9y837PWuzuv41O5jFdqNQwVQEQsimY0/iVNkwBY4+4hMfhQ7d4Dbw==}
+  katex@0.19.1:
+    resolution: {integrity: sha512-jG8uKntjSEcm2EpQOh0XturpPuuC9r3Sq5HLHdsFdWZT27E672SF19QEi+of0/YeOy15lDgRhKvr5614uRrEfA==}
     hasBin: true
 
   keygrip@1.1.0:
@@ -1530,12 +1523,6 @@ packages:
 
   linkify-it@6.1.0:
     resolution: {integrity: sha512-wJ/TwpSDTLepCrQoYWYIExIKg5Zchex2Nn5yk2mFnB+6PtdkHtyLx742md9csRjjOnGkKIS/RrbY7l8D6gT9Vw==}
-
-  lodash.escaperegexp@4.1.2:
-    resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
-
-  lodash.groupby@4.6.0:
-    resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
 
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
@@ -1560,9 +1547,6 @@ packages:
 
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
-
-  lodash.uniq@4.5.0:
-    resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
 
   log4js@6.9.1:
     resolution: {integrity: sha512-1somDdy9sChrr9/f4UlzhdaGfDR2c/SaD2a4T7qEkG4jTS57/B3qmnjLYePwQ8cqWnUHZI0iAKxMBpCZICiZ2g==}
@@ -1629,9 +1613,6 @@ packages:
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
 
-  ms@1.0.0:
-    resolution: {integrity: sha512-85ytwCiGUnD84ui6ULG1KBFMaZgHW3jg5KPr9jt+ZPYt75+XK+JGbYddGrBQ+RSHXOhekCnCZwJywBoFvFl0kw==}
-
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
@@ -1653,8 +1634,8 @@ packages:
   node-schedule@1.3.3:
     resolution: {integrity: sha512-uF9Ubn6luOPrcAYKfsXWimcJ1tPFtQ8I85wb4T3NgJQrXazEzojcFZVk46ZlLHby3eEJChgkV/0T689IsXh2Gw==}
 
-  nodemailer@10.1.3:
-    resolution: {integrity: sha512-KXIsjylUgdxBKFJ9XGwV+qIHb1XvVZQ15l1DmHLzDvSvxG9puEPhNoWuu/DmJ303t828mA+Cax5ucFaZKGN0mw==}
+  nodemailer@10.3.1:
+    resolution: {integrity: sha512-uF0AFsJC07Y1vdW7p580DKAnh7rAO+4UPSSB3mDCPNDufoiaOebV6JmrzpxB14OjEEEiBsNdYoM2Y+fN8M7BBA==}
     engines: {node: '>=20.0.0'}
 
   nunjucks@3.2.4:
@@ -1849,10 +1830,6 @@ packages:
     resolution: {integrity: sha512-DWRFd3dQEGKK1Mh5kENsVA0+O12NxJbFRKk6X3cxpK0aplPQDFbdrfyS+C2Z2jomt1RbPniXUt0mGh1YrNGbAQ==}
     engines: {node: '>=6.0.0'}
 
-  think-helper@1.1.5:
-    resolution: {integrity: sha512-xsNcHWvEC6L0X9tXhIBsP+LcHvuB8pGxcjwy7mtE+KSgZcPWc0A36oUbxZXJgO6w6CpeSZWdkaRTbIpEvV05Hg==}
-    engines: {node: '>=6.0.0'}
-
   think-helper@1.3.0:
     resolution: {integrity: sha512-SLWVPtst6Ya3/iK674BRGNCDT5iGnojDB/6+E73Em9VSw+/D9wOfrawMI5LmMSHK5SK/zmKQdo2mVa9b7eO+vA==}
     engines: {node: '>=20.19.0'}
@@ -1988,11 +1965,6 @@ packages:
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
-
-  uuid@7.0.3:
-    resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
-    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-    hasBin: true
 
   validator@9.4.1:
     resolution: {integrity: sha512-YV5KjzvRmSyJ1ee/Dm5UED0G+1L4GZnLN3w6/T+zZm8scVua4sOhYKWTUrKa0H/tMiJyO9QLHMPN+9mB/aMunA==}
@@ -2313,15 +2285,9 @@ snapshots:
 
   '@exodus/bytes@1.16.0': {}
 
-  '@fast-csv/format@5.0.7':
-    dependencies:
-      lodash.escaperegexp: 4.1.2
+  '@fast-csv/format@5.0.8': {}
 
-  '@fast-csv/parse@5.0.7':
-    dependencies:
-      lodash.escaperegexp: 4.1.2
-      lodash.groupby: 4.6.0
-      lodash.uniq: 4.5.0
+  '@fast-csv/parse@5.0.8': {}
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
@@ -2336,54 +2302,54 @@ snapshots:
     dependencies:
       vary: 1.1.2
 
-  '@mdit/helper@1.1.2(markdown-it@15.0.3)':
+  '@mdit/helper@1.2.0(markdown-it@15.0.3)':
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-emoji@1.2.2(markdown-it@15.0.3)':
+  '@mdit/plugin-emoji@1.2.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-inline-rule@2.2.2(markdown-it@15.0.3)':
+  '@mdit/plugin-inline-rule@2.2.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-katex@1.1.3(markdown-it@15.0.3)':
+  '@mdit/plugin-katex@1.1.4(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-tex': 1.1.2(markdown-it@15.0.3)
-      katex: 0.18.10
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
+      '@mdit/plugin-tex': 1.1.3(markdown-it@15.0.3)
+      katex: 0.19.1
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-spoiler@2.1.2(markdown-it@15.0.3)':
+  '@mdit/plugin-spoiler@2.1.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-inline-rule': 2.2.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
+      '@mdit/plugin-inline-rule': 2.2.3(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-sub@1.1.2(markdown-it@15.0.3)':
+  '@mdit/plugin-sub@1.1.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-inline-rule': 2.2.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
+      '@mdit/plugin-inline-rule': 2.2.3(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-sup@1.1.2(markdown-it@15.0.3)':
+  '@mdit/plugin-sup@1.1.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-inline-rule': 2.2.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
+      '@mdit/plugin-inline-rule': 2.2.3(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
-  '@mdit/plugin-tex@1.1.2(markdown-it@15.0.3)':
+  '@mdit/plugin-tex@1.1.3(markdown-it@15.0.3)':
     dependencies:
-      '@mdit/helper': 1.1.2(markdown-it@15.0.3)
+      '@mdit/helper': 1.2.0(markdown-it@15.0.3)
     optionalDependencies:
       markdown-it: 15.0.3
 
@@ -2756,23 +2722,23 @@ snapshots:
 
   '@waline-plugins/privacy@1.0.0': {}
 
-  '@waline/vercel@1.43.4(patch_hash=8ee92015813257933c177ce6b9cb89fc448c00907c03450486f9b1f3f469a1f0)(supports-color@7.2.0)':
+  '@waline/vercel@1.43.6(patch_hash=bc0f48c0ca3b0eacd0ed577f235ac822144d6a10d62f516d3083736ab57c7413)(supports-color@7.2.0)':
     dependencies:
       '@koa/cors': 5.0.0
-      '@mdit/plugin-emoji': 1.2.2(markdown-it@15.0.3)
-      '@mdit/plugin-katex': 1.1.3(markdown-it@15.0.3)
-      '@mdit/plugin-spoiler': 2.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-sub': 1.1.2(markdown-it@15.0.3)
-      '@mdit/plugin-sup': 1.1.2(markdown-it@15.0.3)
+      '@mdit/plugin-emoji': 1.2.3(markdown-it@15.0.3)
+      '@mdit/plugin-katex': 1.1.4(markdown-it@15.0.3)
+      '@mdit/plugin-spoiler': 2.1.3(markdown-it@15.0.3)
+      '@mdit/plugin-sub': 1.1.3(markdown-it@15.0.3)
+      '@mdit/plugin-sup': 1.1.3(markdown-it@15.0.3)
       akismet: link:packages/akismet-js
-      dompurify: 3.4.16
-      fast-csv: 5.0.7
+      dompurify: 3.4.17
+      fast-csv: 5.0.8
       form-data: 4.0.6
       jsdom: 30.1.3
       jsonwebtoken: 9.0.3
       koa-compose: 4.1.0
       markdown-it: 15.0.3
-      nodemailer: 10.1.3
+      nodemailer: 10.3.1
       nunjucks: 3.2.4
       phpass: 1.0.0
       prismjs: 1.30.0
@@ -2918,11 +2884,9 @@ snapshots:
 
   detect-europe-js@0.1.2: {}
 
-  dompurify@3.4.16:
+  dompurify@3.4.17:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
-
-  dotenv@17.4.2: {}
 
   ecdsa-sig-formatter@1.0.11:
     dependencies:
@@ -2973,10 +2937,10 @@ snapshots:
 
   expect-type@1.4.0: {}
 
-  fast-csv@5.0.7:
+  fast-csv@5.0.8:
     dependencies:
-      '@fast-csv/format': 5.0.7
-      '@fast-csv/parse': 5.0.7
+      '@fast-csv/format': 5.0.8
+      '@fast-csv/parse': 5.0.8
 
   fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
@@ -3127,7 +3091,7 @@ snapshots:
       jwa: 2.0.1
       safe-buffer: '@nolyfill/safe-buffer@1.0.44'
 
-  katex@0.18.10:
+  katex@0.19.1:
     dependencies:
       commander: 15.0.0
 
@@ -3171,10 +3135,6 @@ snapshots:
     dependencies:
       uc.micro: 3.0.0
 
-  lodash.escaperegexp@4.1.2: {}
-
-  lodash.groupby@4.6.0: {}
-
   lodash.includes@4.3.0: {}
 
   lodash.isboolean@3.0.3: {}
@@ -3190,8 +3150,6 @@ snapshots:
   lodash.merge@4.6.2: {}
 
   lodash.once@4.1.1: {}
-
-  lodash.uniq@4.5.0: {}
 
   log4js@6.9.1(supports-color@7.2.0):
     dependencies:
@@ -3260,8 +3218,6 @@ snapshots:
 
   moment@2.30.1: {}
 
-  ms@1.0.0: {}
-
   ms@2.0.0: {}
 
   ms@2.1.3: {}
@@ -3282,7 +3238,7 @@ snapshots:
       long-timeout: 0.1.1
       sorted-array-functions: 1.3.0
 
-  nodemailer@10.1.3: {}
+  nodemailer@10.3.1: {}
 
   nunjucks@3.2.4:
     dependencies:
@@ -3446,42 +3402,35 @@ snapshots:
   think-cache@1.1.2:
     dependencies:
       think-debounce: 1.0.4
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-cluster@1.5.8(supports-color@7.2.0):
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
       string-hash: 1.1.3
-      think-helper: 1.1.5
+      think-helper: 1.3.0
     transitivePeerDependencies:
       - supports-color
 
   think-config@1.1.3:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-controller@1.0.5:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-crontab@1.0.4(supports-color@7.2.0):
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
       node-schedule: 1.3.3
       think-cluster: 1.5.8(supports-color@7.2.0)
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       think-mock-http: 1.0.6(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
 
   think-debounce@1.0.4: {}
-
-  think-helper@1.1.5:
-    dependencies:
-      core-util-is: 1.0.3
-      lodash.merge: 4.6.2
-      ms: 1.0.0
-      uuid: 7.0.3
 
   think-helper@1.3.0:
     dependencies:
@@ -3492,13 +3441,13 @@ snapshots:
 
   think-instance@1.0.2:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-loader@1.2.3(supports-color@7.2.0):
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
       path-to-regexp: 1.9.0
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       thinkjs: 4.0.0(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
@@ -3511,23 +3460,23 @@ snapshots:
 
   think-logic@1.2.2:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-meta@1.0.6:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-mock-http@1.0.6(supports-color@7.2.0):
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
-      think-helper: 1.1.5
+      think-helper: 1.3.0
     transitivePeerDependencies:
       - supports-color
 
   think-model-abstract@1.6.5(supports-color@7.2.0):
     dependencies:
       debug: 3.2.7(supports-color@7.2.0)
-      think-helper: 1.1.5
+      think-helper: 1.3.0
     transitivePeerDependencies:
       - supports-color
 
@@ -3535,7 +3484,7 @@ snapshots:
     dependencies:
       think-cache: 1.1.2
       think-debounce: 1.0.4
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       think-model-abstract: 1.6.5(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
@@ -3546,7 +3495,7 @@ snapshots:
       inflation: 2.1.0
       on-finished: 2.4.1
       raw-body: 2.5.3
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       xml2js: 0.6.2
 
   think-pm2@1.0.0: {}
@@ -3555,7 +3504,7 @@ snapshots:
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
       koa-send: 3.3.0(supports-color@7.2.0)
-      think-helper: 1.1.5
+      think-helper: 1.3.0
     transitivePeerDependencies:
       - supports-color
 
@@ -3569,7 +3518,7 @@ snapshots:
     dependencies:
       debug: 2.6.9(supports-color@7.2.0)
       path-to-regexp: 1.9.0
-      think-helper: 1.1.5
+      think-helper: 1.3.0
     transitivePeerDependencies:
       - supports-color
 
@@ -3578,11 +3527,11 @@ snapshots:
       source-map-support: 0.4.18
       stack-trace: 0.0.9
       statuses: 1.5.0
-      think-helper: 1.1.5
+      think-helper: 1.3.0
 
   think-validator@1.6.7:
     dependencies:
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       validator: 9.4.1
 
   thinkjs@4.0.0(supports-color@7.2.0):
@@ -3596,7 +3545,7 @@ snapshots:
       think-config: 1.1.3
       think-controller: 1.0.5
       think-crontab: 1.0.4(supports-color@7.2.0)
-      think-helper: 1.1.5
+      think-helper: 1.3.0
       think-loader: 1.2.3(supports-color@7.2.0)
       think-logger3: 1.4.0(supports-color@7.2.0)
       think-logic: 1.2.2
@@ -3689,8 +3638,6 @@ snapshots:
   universalify@0.1.2: {}
 
   unpipe@1.0.0: {}
-
-  uuid@7.0.3: {}
 
   validator@9.4.1: {}
 

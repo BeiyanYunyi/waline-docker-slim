@@ -20,16 +20,15 @@
   },
   "main": "./src/index.ts",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "^26.0.0"
   },
   "type": "module",
   "devDependencies": {
     "@vitest/coverage-v8": "4.1.10",
-    "dotenv": "17.4.2",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   },
   "scripts": {
-    "test": "vitest --coverage"
+    "test": "node --env-file-if-exists=.env ./node_modules/vitest/vitest.mjs --coverage"
   }
 }

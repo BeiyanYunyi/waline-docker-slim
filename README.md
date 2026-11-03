@@ -61,4 +61,5 @@ span.katex math > * {
 ```
 
 [^1]: Unpacked size of the image. After pulling `ghcr.io/beiyanyunyi/waline-docker-slim:edge` and `lizheming/waline:alpine`, run `docker image ls` and check the `SIZE` field.
+
 [^2]: Production dependencies only.

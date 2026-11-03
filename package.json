@@ -4,13 +4,13 @@
   "type": "module",
   "dependencies": {
     "@waline-plugins/privacy": "^1.0.0",
-    "@waline/vercel": "^1.43.4",
+    "@waline/vercel": "^1.43.6",
     "thinkjs": "4.0.0",
     "waline-plugin-class-it-up": "workspace:*",
     "waline-plugin-uid": "workspace:*"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node --env-file-if-exists=.env index.js",
     "build": "pnpm --filter \"*\" --if-present build"
   },
   "engines": {

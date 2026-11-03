@@ -1,9 +1,7 @@
 import { client as akismetClient } from '../src/index';
-import { config as dotenvConfig } from 'dotenv';
 import { describe, it, expect } from 'vitest';
 
 describe('Akismet', () => {
-  dotenvConfig();
   const apiKey = '70542d86693e';
   const blog = 'https://stblog.penclub.club';
 

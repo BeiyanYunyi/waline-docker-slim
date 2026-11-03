@@ -2,6 +2,8 @@ packages:
   - "packages/*"
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - "@waline/vercel@1.43.6"
 overrides:
   "deep-equal": "npm:@nolyfill/deep-equal@^1"
   "is-generator-function": "npm:@nolyfill/is-generator-function@^1"
@@ -27,4 +29,4 @@ overrides:
   "ip2region": "-"
   "abab": "npm:@nolyfill/abab@^1"
 patchedDependencies:
-  "@waline/vercel@1.43.4": patches/@waline__vercel.patch
+  "@waline/vercel@1.43.6": patches/@waline__vercel.patch
